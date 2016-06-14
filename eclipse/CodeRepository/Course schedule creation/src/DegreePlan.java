@@ -64,7 +64,7 @@ public class DegreePlan extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblCourses = new JLabel("Courses");
-		lblCourses.setBounds(97, 171, 46, 14);
+		lblCourses.setBounds(97, 171, 88, 14);
 		contentPane.add(lblCourses);
 		
 		JButton btnSave = new JButton("Save");

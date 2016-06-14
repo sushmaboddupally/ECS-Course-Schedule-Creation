@@ -1,4 +1,5 @@
 import java.awt.EventQueue;
+import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -9,6 +10,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import java.awt.BorderLayout;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -299,12 +302,36 @@ public class MainPage {
 		mnDegree.add(mnPrerequisites);
 		
 		JMenuItem mntmAdd_4 = new JMenuItem("Add");
+		mntmAdd_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DegreeReq nw = new DegreeReq();
+				nw.NewScreen();
+			}
+		});
 		mnPrerequisites.add(mntmAdd_4);
 		
 		JMenuItem mntmUpdate_4 = new JMenuItem("Update");
+		mntmUpdate_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DegreeReq nw = new DegreeReq();
+				nw.NewScreen();
+			}
+		});
+		
+		JSeparator separator_28 = new JSeparator();
+		mnPrerequisites.add(separator_28);
 		mnPrerequisites.add(mntmUpdate_4);
 		
 		JMenuItem mntmDelete_4 = new JMenuItem("Delete");
+		mntmDelete_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DegreeReq nw = new DegreeReq();
+				nw.NewScreen();
+			}
+		});
+		
+		JSeparator separator_29 = new JSeparator();
+		mnPrerequisites.add(separator_29);
 		mnPrerequisites.add(mntmDelete_4);
 		
 		JSeparator separator_25 = new JSeparator();
@@ -370,12 +397,6 @@ public class MainPage {
 		});
 		mnImport.add(mntmStudentCourseData);
 		
-		JSeparator separator_9 = new JSeparator();
-		mnImport.add(separator_9);
-		
-		JSeparator separator_10 = new JSeparator();
-		mnImport.add(separator_10);
-		
 		JMenu mnSchedule = new JMenu("Schedule");
 		menuBar.add(mnSchedule);
 		
@@ -415,5 +436,11 @@ public class MainPage {
 		JLabel lblOkhlahomaChristianUniversity = new JLabel("Okhlahoma Christian University");
 		lblOkhlahomaChristianUniversity.setBounds(127, 35, 255, 14);
 		frame.getContentPane().add(lblOkhlahomaChristianUniversity);
+		
+		JLabel lblNewLabel = new JLabel("");
+		Image img = new ImageIcon(this.getClass().getResource("/OC.gif")).getImage();
+		lblNewLabel.setIcon(new ImageIcon(img));
+		lblNewLabel.setBounds(116, 60, 186, 169);
+		frame.getContentPane().add(lblNewLabel);
 	}
 }
