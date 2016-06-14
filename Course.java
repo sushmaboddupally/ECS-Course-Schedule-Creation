@@ -11,7 +11,8 @@ import java.util.*;
 public class Course {
 
 	ArrayList<Faculty> faculty;
-	Course preRequisit;
+	ArrayList<Course> preRequisit;
+	
 	/**
 	 * course number offered in grad school
 	 */
@@ -32,6 +33,10 @@ public class Course {
 	 * Maximum cap for class
 	 */
 	private int classCap;
+	
+	private boolean courseOfferedInFall;
+	private boolean courseOfferedInSpring;
+	private boolean courseOfferedInSummer;
 
 	public int getNumber() {
 		return this.number;
@@ -53,7 +58,7 @@ public class Course {
 		return this.description;
 	}
 
-	public void setDescription(string description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
