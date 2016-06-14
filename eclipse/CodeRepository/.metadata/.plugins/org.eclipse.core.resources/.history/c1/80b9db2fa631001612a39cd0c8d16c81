@@ -1,0 +1,92 @@
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+
+public class StudentEdit extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+
+	/**
+	 * Launch the application.
+	 */
+	//public static void main(String[] args) {
+	public static void NewScreen() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					StudentEdit frame = new StudentEdit();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public StudentEdit() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblStudentId = new JLabel("Student ID");
+		lblStudentId.setBounds(61, 48, 71, 14);
+		contentPane.add(lblStudentId);
+		
+		JLabel lblNewLabel = new JLabel("Department");
+		lblNewLabel.setBounds(61, 89, 71, 14);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Grad Start Year");
+		lblNewLabel_1.setBounds(61, 131, 83, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblEstimatedGradEnd = new JLabel("Estimated Grad End Year");
+		lblEstimatedGradEnd.setBounds(55, 167, 119, 14);
+		contentPane.add(lblEstimatedGradEnd);
+		
+		JButton btnSave = new JButton("Save");
+		btnSave.setBounds(99, 210, 89, 23);
+		contentPane.add(btnSave);
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBounds(234, 210, 89, 23);
+		contentPane.add(btnCancel);
+		
+		textField = new JTextField();
+		textField.setBounds(216, 45, 107, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(216, 83, 107, 20);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(216, 128, 107, 20);
+		contentPane.add(textField_2);
+		textField_2.setColumns(10);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(216, 164, 107, 20);
+		contentPane.add(textField_3);
+		textField_3.setColumns(10);
+	}
+
+}
