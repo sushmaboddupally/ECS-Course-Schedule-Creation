@@ -25,6 +25,11 @@ public class Schedule {
 	public  void loadUniversity(University university)
 	{
 		this.initCourseData();
+		initFacultyData();
+		initGradSchoolData();
+		initGradSchoolData();
+		initDegereeReqData();
+		initFacultyData();
 		
 		
 	}
