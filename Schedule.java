@@ -229,7 +229,7 @@ public class Schedule {
 		        	System.out.println(degree.getForescast());
 	        }
 	        bufferedReader.close();
-		}
+		}	
 		 catch(FileNotFoundException ex) 
 	    {
 	        System.out.println(
@@ -244,5 +244,109 @@ public class Schedule {
 	}		 
 	
 /***************************************************************************************************/	
-
+	public void initDegereeReqData() {	
+		String fileName ="TestDataDegreePlanReq.csv";
+		String line = null;
+		String[] token;
+		//String dataType; 
+		try { 
+	        // FileReader reads text files in the default encoding.
+	        FileReader fileReader = 
+	        new FileReader(fileName);
+	        // Always wrap FileReader in BufferedReader.
+	        BufferedReader bufferedReader = 
+	        new BufferedReader(fileReader);
+	        //while there is data in file do this
+	        Scanner inputSteam = new Scanner(fileReader);
+	        inputSteam.hasNext();
+	        while((line = bufferedReader.readLine()) != null)
+	        {
+	        	DegreeRequirements degreeReq = new DegreeRequirements();
+	        		//split data by comma
+		        	token = line.split(",");
+		        	//dataType = token[0];
+		        	degreeReq.setDegreeReqCode(token[0]); 
+		        	degreeReq.setDegreeReqdesc(token[1]);
+		        	degreeReq.setDegreeReqHours(token[2]);
+		        	degreeReq.setDegreeReqType(token[3]);
+		        	degreeReq.setDegreeReqCourses(token[4]);
+		        	/**
+		        	 * Determined by data type of the token, variables are set. For 
+		        	 * example if it is "Store", it has to be name of the store. However, if it 
+		        	 * is "Cashier", it is all info about the current cashier and so on. 
+		        	 */
+		        	System.out.println(degreeReq.getDegreeReqCode() + "*************Degree code");
+		        	System.out.println(degreeReq.getDegreeReqdesc() + "************description");
+		        	System.out.println(degreeReq.getDegreeReqHours() + "************hours");
+		        	System.out.println(degreeReq.getDegreeReqType() + "************type");
+		        	System.out.println(degreeReq.getDegreeReqCourses() + "************coure");
+	        }
+	        bufferedReader.close();
+		}
+		 catch(FileNotFoundException ex) 
+	    {
+	        System.out.println(
+	            "Unable to open file '" + 
+	            fileName + "'");                
+	    } catch(IOException ex) {
+	        System.out.println(
+	                "Error reading file '" 
+	                + fileName + "'");   	
+	    	
+	    	}
+	}	
+	
+/******************************************************************************************/	
+	public void initFacultyData() {	
+		String fileName ="TestDataFaculty.csv";
+		String line = null;
+		String[] token;
+		//String dataType; 
+		try { 
+	        // FileReader reads text files in the default encoding.
+	        FileReader fileReader = 
+	        new FileReader(fileName);
+	        // Always wrap FileReader in BufferedReader.
+	        BufferedReader bufferedReader = 
+	        new BufferedReader(fileReader);
+	        //while there is data in file do this
+	        Scanner inputSteam = new Scanner(fileReader);
+	        inputSteam.hasNext();
+	        while((line = bufferedReader.readLine()) != null)
+	        {
+	        	Faculty degreeReq = new Faculty();
+	        		//split data by comma
+		        	token = line.split(",");
+		        	//dataType = token[0];
+		        	degreeReq.setfacultyFirstName(token[0]); 
+		        	degreeReq.setfacultyLastName(token[1]);
+		        	degreeReq.setMaxLoadFall(token[2]);
+		        	degreeReq.setMaxLoadSummer(token[3]);
+		        	degreeReq.setMaxLoadSpring(token[4]);
+		        	/**
+		        	 * Determined by data type of the token, variables are set. For 
+		        	 * example if it is "Store", it has to be name of the store. However, if it 
+		        	 * is "Cashier", it is all info about the current cashier and so on. 
+		        	 */
+		        	System.out.println(degreeReq.getfacultyFirstName() + "*************Degree code");
+		        	System.out.println(degreeReq.getfacultyLastName() + "************description");
+		        	System.out.println(degreeReq.getmaxLoadFall() + "************hours");
+		        	System.out.println(degreeReq.getMaxLoadSummer() + "************type");
+		        	System.out.println(degreeReq.getMaxLoadSpring() + "************coure");
+	        }
+	        bufferedReader.close();
+		}
+		 catch(FileNotFoundException ex) 
+	    {
+	        System.out.println(
+	            "Unable to open file '" + 
+	            fileName + "'");                
+	    } catch(IOException ex) {
+	        System.out.println(
+	                "Error reading file '" 
+	                + fileName + "'");   	
+	    	
+	    	}
+	}	
+	
 }
