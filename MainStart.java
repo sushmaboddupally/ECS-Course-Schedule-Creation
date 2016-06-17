@@ -1,83 +1,89 @@
-/**
- * 
- */
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+package GUI;
 
-/**
- * @author netra
- *
- */
-public class main {
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
+import SOURCE.*;
+
+
+public class MainStart {
+	public static University myUniversity;
+	
 	/**
+	 * Main prints out name of the store, creates new instance of Store(), 
+	 * and runs store in POSJFrame.
+	 *  
 	 * @param args
 	 */
-	public static void main(String[] args) {	
-		String fileName ="TestDataCourses.csv";
-		String line = null;
-		String[] token;
-		ArrayList<Course> CoursesData;
-		//String dataType; 
-		try { 
-	        // FileReader reads text files in the default encoding.
-	        FileReader fileReader = 
-	        new FileReader(fileName);
-	        // Always wrap FileReader in BufferedReader.
-	        BufferedReader bufferedReader = 
-	        new BufferedReader(fileReader);
-	        //while there is data in file do this
-	        Scanner inputSteam = new Scanner(fileReader);
-	       // inputSteam.hasNext();
-	        while((line = bufferedReader.readLine()) != null)
-	        {
-	        	Course gradSchool = new Course();
-	        		//split data by comma
-		        	token = line.split(",");
-		        	//dataType = token[0];
-		        	gradSchool.setCourseCode(token[0]); 
-		        	gradSchool.setCourseName(token[1]);
-		        	gradSchool.setCourseDescription(token[2]);
-		        	gradSchool.setCourseHours(token[3]);
-		        	gradSchool.setCourseCap(token[4]);
-		        	gradSchool.setCourseOfferedInFall(token[5]);
-		        	gradSchool.setCourseOfferedInSpring(token[6]);
-		        	gradSchool.setCourseOfferedInSummer(token[7]);
-		        	
-		        	
-		        	/**
-		        	 * Determined by data type of the token, variables are set. For 
-		        	 * example if it is "Store", it has to be name of the store. However, if it 
-		        	 * is "Cashier", it is all info about the current cashier and so on. 
-		        	 */
-		        	System.out.println(gradSchool.getCourseCode());
-		        	System.out.println(gradSchool.getCourseName());
-		        	System.out.println(gradSchool.getCourseDescription());
-		        	System.out.println(gradSchool.getCourseHours());
-		        	System.out.println(gradSchool.getCourseCap());
-		        	
-		        	System.out.println(gradSchool.getCourseOfferedInFall());
-		        	System.out.println(gradSchool.getCourseOfferedInSpring());
-		        	System.out.println(gradSchool.getCourseOfferedInSummer());
-		        	
-	        }
-	        bufferedReader.close();
+	public static void main(String[] args) 
+	{
+
+		myUniversity = new University();
+		myUniversity.openUniversity();
+	//POSJFrame.run(myUniversity);
+
+	}
+
+	/**
+	 * printStore() prints out the data from the file. It prints all of the cashiers,
+	 * registers, items and sessions.
+	 */
+	public static void printStore()
+	{
+		System.out.println("==============");
+		System.out.println("Faculty");
+		System.out.println("==============");
+		for (Entry<String, Faculty> entry : myUniversity.getName().entrySet()) 
+		{
+			System.out.println(myUniversity.getFaculty());
+	        
 		}
-		 catch(FileNotFoundException ex) 
-	    {
-	        System.out.println(
-	            "Unable to open file '" + 
-	            fileName + "'");                
-	    } catch(IOException ex) {
-	        System.out.println(
-	                "Error reading file '" 
-	                + fileName + "'");   	
-	    	
-	    	}
-	}		 
+		System.out.println("==============");
+		System.out.println("GradeSchool");
+		System.out.println("==============");
+		for (Entry<String, GraduateSchool> entry : myUniversity.getName().entrySet()) 
+		{
+			System.out.println(myUniversity.getGradSchool());
+	        
+		}
+		System.out.println("==============");
+		System.out.println("Courses");
+		System.out.println("==============");
+		for (Entry<String, Course> entry : myUniversity.getName().entrySet()) 
+		{
+			System.out.println(myUniversity.getCourses());
+	        
+		}
+		System.out.println("==============");
+		System.out.println("Degree");
+		System.out.println("==============");
+		for (Entry<String, Degree> entry : myUniversity.getName().entrySet()) 
+		{
+			System.out.println(myUniversity.getDegree());
+	        
+		}
+		
+		System.out.println("==============");
+		System.out.println("Degree Requirement");
+		System.out.println("==============");
+		for (Entry<String, DegreeReq> entry : myUniversity.getName().entrySet()) 
+		{
+			System.out.println(myUniversity.getDegreeReq());
+	        
+		}
+		
+		System.out.println("==============");
+		System.out.println("Semester");
+		System.out.println("==============");
+		for (Entry<String, Semester> entry : myUniversity.getName().entrySet()) 
+		{
+			System.out.println(myUniversity.getSemester());
+	        
+		}
+		
+		
+	}
 }
+
+
