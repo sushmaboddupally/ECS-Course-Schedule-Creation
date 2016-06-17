@@ -22,6 +22,7 @@ public class MainStart {
 		myUniversity = new University();
 		myUniversity.openUniversity();
 	//POSJFrame.run(myUniversity);
+		printStore();
 
 	}
 
@@ -31,56 +32,59 @@ public class MainStart {
 	 */
 	public static void printStore()
 	{
-		System.out.println("==============");
-		System.out.println("Faculty");
-		System.out.println("==============");
-		for (Entry<String, Faculty> entry : myUniversity.getName().entrySet()) 
-		{
-			System.out.println(myUniversity.getFaculty());
-	        
-		}
-		System.out.println("==============");
-		System.out.println("GradeSchool");
-		System.out.println("==============");
-		for (Entry<String, GraduateSchool> entry : myUniversity.getName().entrySet()) 
-		{
-			System.out.println(myUniversity.getGradSchool());
-	        
-		}
+//		System.out.println("==============");
+//		System.out.println("Faculty");
+//		System.out.println("==============");
+//		for (Entry<String, Faculty> entry : myUniversity.getFaculty().entrySet()) 
+//		{
+//			System.out.println(myUniversity.getFaculty());
+//	        
+//		}
+//		System.out.println("==============");
+//		System.out.println("GradeSchool");
+//		System.out.println("==============");
+//		for (Entry<String, GraduateSchool> entry : myUniversity.getGradSchool().entrySet()) 
+//		{
+//			System.out.println(myUniversity.getGradSchool());
+//	        
+//		}
 		System.out.println("==============");
 		System.out.println("Courses");
 		System.out.println("==============");
-		for (Entry<String, Course> entry : myUniversity.getName().entrySet()) 
+		for (Entry<String, Course> entry : myUniversity.getCourses().entrySet()) 
 		{
-			System.out.println(myUniversity.getCourses());
+			System.out.print(entry.getValue().getCourseCode());
+			System.out.print(entry.getValue().getCourseName());
+			System.out.print(entry.getValue().getCourseTeachers());
+			System.out.print(entry.getValue().getCourseHours());
 	        
 		}
-		System.out.println("==============");
-		System.out.println("Degree");
-		System.out.println("==============");
-		for (Entry<String, Degree> entry : myUniversity.getName().entrySet()) 
-		{
-			System.out.println(myUniversity.getDegree());
-	        
-		}
-		
-		System.out.println("==============");
-		System.out.println("Degree Requirement");
-		System.out.println("==============");
-		for (Entry<String, DegreeReq> entry : myUniversity.getName().entrySet()) 
-		{
-			System.out.println(myUniversity.getDegreeReq());
-	        
-		}
-		
-		System.out.println("==============");
-		System.out.println("Semester");
-		System.out.println("==============");
-		for (Entry<String, Semester> entry : myUniversity.getName().entrySet()) 
-		{
-			System.out.println(myUniversity.getSemester());
-	        
-		}
+//		System.out.println("==============");
+//		System.out.println("Degree");
+//		System.out.println("==============");
+//		for (Entry<String, Degree> entry : myUniversity.getName().entrySet()) 
+//		{
+//			System.out.println(myUniversity.getDegree());
+//	        
+//		}
+//		
+//		System.out.println("==============");
+//		System.out.println("Degree Requirement");
+//		System.out.println("==============");
+//		for (Entry<String, DegreeReq> entry : myUniversity.getName().entrySet()) 
+//		{
+//			System.out.println(myUniversity.getDegreeReq());
+//	        
+//		}
+//		
+//		System.out.println("==============");
+//		System.out.println("Semester");
+//		System.out.println("==============");
+//		for (Entry<String, Semester> entry : myUniversity.getName().entrySet()) 
+//		{
+//			System.out.println(myUniversity.getSemester());
+//	        
+//		}
 		
 		
 	}

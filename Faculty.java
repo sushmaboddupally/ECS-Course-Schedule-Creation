@@ -19,10 +19,10 @@ public class Faculty {
 	public Faculty(String section, String course, String facultyFirstName, String facultyLastName, String maxLoadFall,
 			String maxLoadSpring, String maxLoadSummer) {
 		super();
-		this.section = section;
-		this.course = course;
 		this.facultyFirstName = facultyFirstName;
 		this.facultyLastName = facultyLastName;
+		this.section = section;
+		this.course = course;
 		this.maxLoadFall = maxLoadFall;
 		this.maxLoadSpring = maxLoadSpring;
 		this.maxLoadSummer = maxLoadSummer;
