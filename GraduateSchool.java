@@ -1,50 +1,30 @@
-import java.util.*;
+package SOURCE;
 
-/**
- * Grad School offers many degree courses
- */
+import java.util.ArrayList;
+
+//import USM.Degree;
+
 public class GraduateSchool {
 	private String name;
 	private String abbrevation;
-	//ArrayList<Student> student;
-//	University university;
-	//ArrayList<Student> students;
-//	ArrayList<Degree> degreePlan;
-//	ArrayList<Faculty> faculties;
-	ArrayList<Degree> degreeList;       //Added
+	ArrayList<Degree> degreeList; 
+	
 	public String getName() {
-		return this.name;
+		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getAbbrevation() {
-		return this.abbrevation;
+		return abbrevation;
 	}
-
 	public void setAbbrevation(String abbrevation) {
 		this.abbrevation = abbrevation;
 	}
-
-	
-	public GraduateSchool() {
-		
-		degreeList = new ArrayList<Degree>();
-	}
-	
-	public ArrayList<Degree> getDegreeList()
-	{
-		return this.degreeList;
-	}
-	
-	public void addDegree (Degree degreeElement)
-	{
-		if (degreeElement != null)
-		{
-			getDegreeList().add(degreeElement);
-		}
+	public GraduateSchool(String name, String abbrevation) {
+		super();
+		this.name = name;
+		this.abbrevation = abbrevation;
 	}
 
 }

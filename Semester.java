@@ -1,17 +1,7 @@
-/**
- * 
- */
+package SOURCE;
 
-/**
- * @author netra
- *
- */
-/**
- * A Semester is a period of time that a set of course is offered.  
- */
 public class Semester {
-
-	Schedule schedule;
+//	Schedule schedule;
 	/**
 	 * semester start data
 	 */
@@ -24,37 +14,31 @@ public class Semester {
 	 * semester end data
 	 */
 	private String endDate;
-
-	/**
-	 * service to provide semester data
-	 */
-	public String semester() {
-		// TODO - implement Semester.semester
-		throw new UnsupportedOperationException();
+	public Semester(String startDate, String name, String endDate) {
+		super();
+		this.startDate = startDate;
+		this.name = name;
+		this.endDate = endDate;
 	}
-
 	public String getStartDate() {
-		return this.startDate;
+		return startDate;
 	}
-
-	public void setStartDate(string startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
-
 	public String getName() {
-		return this.name;
+		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getEndDate() {
-		return this.endDate;
+		return endDate;
 	}
-
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+	
+	
 
 }

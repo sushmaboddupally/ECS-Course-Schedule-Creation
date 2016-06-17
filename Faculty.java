@@ -1,83 +1,87 @@
+package SOURCE;
+
 import java.util.ArrayList;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 public class Faculty {
-
-	ArrayList<Section> section;
-	ArrayList<FacultyLoad> facultyLoad;
-	ArrayList<Course> course;
+	private String section;
+	//ArrayList<FacultyLoad> facultyLoad;
+	private String  course;
 	/**
 	 * degree course teaching faculty name
 	 */
 	private String facultyFirstName;
 	private String facultyLastName;
-	
-
 	private String maxLoadFall;
 	private String maxLoadSpring;
 	private String maxLoadSummer;
+//	GraduateSchool facultyGradeSchool;
 	
-	
-	GraduateSchool facultyGradeSchool;
-	
-	public Faculty()
-	{
-	/*	section = new ArrayList<String, Section>();
-		facultyLoad = new ArrayList<String, FacultyLoad>();
-		course = new ArrayList<String, Course>();
-	*/
-	}
-	
-	public Faculty(String facultyFirstName, String facultyLastName, String facultyGradeSchool, String maxLoadFall, String maxLoadSpring,String maxLoadSummer)
-	{
-		setfacultyFirstName(facultyFirstName);
-		setfacultyLastName(facultyLastName);
-		setfacultyGradeSchool(facultyGradeSchool);
-		setmaxLoadFall(maxLoadFall);
-		setmaxLoadFall(maxLoadSpring);
-		setmaxLoadFall(maxLoadSummer);
-		//setSSN(ssn);
-	}
-	
-	public String getfacultyFirstName() {
-		return this.facultyFirstName;
+	public Faculty(String section, String course, String facultyFirstName, String facultyLastName, String maxLoadFall,
+			String maxLoadSpring, String maxLoadSummer) {
+		super();
+		this.section = section;
+		this.course = course;
+		this.facultyFirstName = facultyFirstName;
+		this.facultyLastName = facultyLastName;
+		this.maxLoadFall = maxLoadFall;
+		this.maxLoadSpring = maxLoadSpring;
+		this.maxLoadSummer = maxLoadSummer;
 	}
 
-	public void setfacultyFirstName(String name) {
+	public String getSection() {
+		return section;
+	}
+
+	public void setSection(String section) {
+		this.section = section;
+	}
+
+	public String getCourse() {
+		return course;
+	}
+
+	public void setCourse(String course) {
+		this.course = course;
+	}
+
+	public String getFacultyFirstName() {
+		return facultyFirstName;
+	}
+
+	public void setFacultyFirstName(String facultyFirstName) {
 		this.facultyFirstName = facultyFirstName;
 	}
-	
-	public String getfacultyLastName() {
-		return this.facultyLastName;
+
+	public String getFacultyLastName() {
+		return facultyLastName;
 	}
 
-	public void setfacultyLastName(String facultyLastName) {
-		this.facultyFirstName = facultyFirstName;
+	public void setFacultyLastName(String facultyLastName) {
+		this.facultyLastName = facultyLastName;
 	}
 
-	public String getmaxLoadFall() {
-		return this.maxLoadFall;
+	public String getMaxLoadFall() {
+		return maxLoadFall;
 	}
 
-	public void setmaxLoadFall(String maxLoadFall) {
+	public void setMaxLoadFall(String maxLoadFall) {
 		this.maxLoadFall = maxLoadFall;
 	}
 
-	/**
-	 * faculty basic information
-	 */
-	public String faculty() {
-		// TODO - implement Faculty.faculty
-		throw new UnsupportedOperationException();
+	public String getMaxLoadSpring() {
+		return maxLoadSpring;
 	}
 
-	/**
-	 * Faculty additional course list he can teach
-	 */
-	public String facultyTeachAdditionalSection() {
-		// TODO - implement Faculty.facultyTeachAdditionalSection
-		throw new UnsupportedOperationException();
+	public void setMaxLoadSpring(String maxLoadSpring) {
+		this.maxLoadSpring = maxLoadSpring;
 	}
 
+	public String getMaxLoadSummer() {
+		return maxLoadSummer;
+	}
+
+	public void setMaxLoadSummer(String maxLoadSummer) {
+		this.maxLoadSummer = maxLoadSummer;
+	}
+	
 }
