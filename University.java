@@ -208,4 +208,53 @@ public class University
 			getSemester().put(semester.getName(), semester);
 		}
 	}
+	
+	public void removeFculty(Faculty faculty )
+	{
+		if (faculty != null)
+		{
+			getFaculty().remove(faculty.getFacultyLastName());
+		}
+	}
+	
+	public void removeGradSchool(GraduateSchool gradSchool )
+	{
+		if (gradSchool != null)
+		{
+			getFaculty().remove(gradSchool.getName());
+		}
+	}
+
+	
+	public void removeCourse(Course course )
+	{
+		if (course != null)
+		{
+			getCourses().remove(course.getCourseCode());
+		}
+	}
+	
+	public void removeDegree(Degree degree )
+	{
+		if (degree != null)
+		{
+			getDegree().remove(degree.getGradSchool());
+		}
+	}
+	
+	public void removeDegreeReq(DegreeReq degreeReq )
+	{
+		if (degreeReq != null)
+		{
+			getDegreeReq().remove(degreeReq.getDegreeReqCode());
+		}
+	}
+	
+	public void removeSemester(Semester semester )
+	{
+		if (semester != null)
+		{
+			getSemester().remove(semester.getName());
+		}
+	}
 }
