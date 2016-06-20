@@ -15,6 +15,7 @@ public class University
 	 * Association Type = POSPD.Register
 	 */
 	private TreeMap<String,Student> student;
+	private TreeMap<String,StudentSTU> studentSTU;
 	/**
 	 * Association Type = POSPD.TaxCategory
 	 */
@@ -46,6 +47,7 @@ public class University
 	public University()
 	{
 		student = new TreeMap <String, Student>();
+		studentSTU = new TreeMap <String, StudentSTU>();
 		courses = new TreeMap <String, Course>();
 		faculty = new TreeMap <String, Faculty>();
 		
@@ -75,12 +77,15 @@ public class University
 		gradSchool = new TreeMap <String, GraduateSchool>();
 		degreeReq = new TreeMap <String, DegreeReq>();
 		semester = new TreeMap <String, Semester>();
+		studentSTU = new TreeMap <String, StudentSTU>();
 		//upcs = new TreeMap <String, UPC>();
 		//taxCategories = new TreeMap <String, TaxCategory>();
 		//sessions = new TreeSet<Session>();
 	}
 	
-	
+	public void setStudentSTU(TreeMap<String, StudentSTU> studentSTU) {
+		this.studentSTU = studentSTU;
+	}
 
 	public TreeMap<String, Semester> getSemester() {
 		return semester;
@@ -102,7 +107,46 @@ public class University
 	{
 		Univ.loadUniversity(this);
 	}
+	
+	public void openUniversityFaculty()
+	{
+		Univ.loadUniversityFaculty(this);
+		
+	}
+	
+	public void openUniversityCourse()
+	{	
+		Univ.loadUniversityCourse(this);
+	}
+	
+	public void openUniversityGradSch()
+	{	
+		Univ.loadUniversityGradSchool(this);
+	}
+	
+	public void openUniversityDegree()
+	{	
+		Univ.loadUniversityDegree(this);
+	}
+	
+	public void openUniversityDegreeReq()
+	{	
+		Univ.loadUniversityDegreeReq(this);
+	}
+	
+	public void openUniversitySemester()
+	{	
+		Univ.loadUniversitySemester(this);
+	}
 
+	public void openUniversityStudent()
+	{	
+		Univ.loadUniversityStudent(this);
+	}
+	public void openUniversityStudentSTU()
+	{	
+		Univ.loadUniversityStudentSTU(this);
+	}
 	
 	public String getNumber() {
 		return number;
@@ -122,6 +166,10 @@ public class University
 
 	public TreeMap<String, Student> getStudent() {
 		return student;
+	}
+	
+	public TreeMap<String, StudentSTU> getStudentSTU() {
+		return studentSTU;
 	}
 
 	public void setStudent(TreeMap<String, Student> student) {
@@ -206,6 +254,21 @@ public class University
 		if (semester != null)
 		{
 			getSemester().put(semester.getName(), semester);
+		}
+	}
+	
+	public void addStudent(Student student)
+	{
+		if (student != null)
+		{
+			getStudent().put(student.getStudentSTCId(), student);
+		}
+	}
+	public void addStudentSTU(StudentSTU studentSTU)
+	{
+		if (studentSTU != null)
+		{
+			getStudentSTU().put(studentSTU.getStudentSTUId(), studentSTU);
 		}
 	}
 	
