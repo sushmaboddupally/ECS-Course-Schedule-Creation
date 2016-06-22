@@ -1,84 +1,116 @@
-/**
- * 
- */
-
-/**
- * @author netra
- *
- */
+package SOURCE;
 import java.util.*;
 
 public class Course {
-
 	ArrayList<Faculty> faculty;
-	Course preRequisit;
+	ArrayList<Course> preRequisit;
+	//ArrayList<Course> preRequisit;
+
 	/**
 	 * course number offered in grad school
 	 */
-	private int number;
+	private String courseCode;
 	/**
 	 * Degree course name
 	 */
-	private String name;
+	private String courseName;
 	/**
 	 * degree course description
 	 */
-	private String description;
+	private String courseDescription;
 	/**
 	 * credit hrs required for course to complete
 	 */
-	private String creditHours;
+	private String courseHours;
 	/**
 	 * Maximum cap for class
 	 */
-	private int classCap;
-
-	public int getNumber() {
-		return this.number;
+	private String courseCap;
+	
+	private String courseOfferedInFall;
+	private String courseOfferedInSpring;
+	private String courseOfferedInSummer;
+	
+	private String CoursePrereqs;
+	private String CourseTeachers;
+	
+	
+	public Course(String courseCode, String courseName, String courseDescription, String courseHours, String courseCap,
+			String courseOfferedInFall, String courseOfferedInSpring, String courseOfferedInSummer,
+			String coursePrereqs, String courseTeachers) {
+		super();
+		this.courseCode = courseCode;
+		this.courseName = courseName;
+		this.courseDescription = courseDescription;
+		this.courseHours = courseHours;
+		this.courseCap = courseCap;
+		this.courseOfferedInFall = courseOfferedInFall;
+		this.courseOfferedInSpring = courseOfferedInSpring;
+		this.courseOfferedInSummer = courseOfferedInSummer;
+		CoursePrereqs = coursePrereqs;
+		CourseTeachers = courseTeachers;
 	}
-
-	public void setNumber(int number) {
-		this.number = number;
+	
+	public String getCourseCode() {
+		return courseCode;
 	}
-
-	public String getName() {
-		return this.name;
+	public void setCourseCode(String courseCode) {
+		this.courseCode = courseCode;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public String getCourseName() {
+		return courseName;
 	}
-
-	public String getDescription() {
-		return this.description;
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
-
-	public void setDescription(string description) {
-		this.description = description;
+	public String getCourseDescription() {
+		return courseDescription;
 	}
-
-	public String getCreditHours() {
-		return this.creditHours;
+	public void setCourseDescription(String courseDescription) {
+		this.courseDescription = courseDescription;
 	}
-
-	public void setCreditHours(String creditHours) {
-		this.creditHours = creditHours;
+	public String getCourseHours() {
+		return courseHours;
 	}
-
-	public int getClassCap() {
-		return this.classCap;
+	public void setCourseHours(String courseHours) {
+		this.courseHours = courseHours;
 	}
-
-	public void setClassCap(int classCap) {
-		this.classCap = classCap;
+	public String getCourseCap() {
+		return courseCap;
 	}
-
-	/**
-	 * Service to provide course information's
-	 */
-	public String course() {
-		// TODO - implement Course.course
-		throw new UnsupportedOperationException();
+	public void setCourseCap(String courseCap) {
+		this.courseCap = courseCap;
 	}
-
+	public String getCourseOfferedInFall() {
+		return courseOfferedInFall;
+	}
+	public void setCourseOfferedInFall(String courseOfferedInFall) {
+		this.courseOfferedInFall = courseOfferedInFall;
+	}
+	public String getCourseOfferedInSpring() {
+		return courseOfferedInSpring;
+	}
+	public void setCourseOfferedInSpring(String courseOfferedInSpring) {
+		this.courseOfferedInSpring = courseOfferedInSpring;
+	}
+	public String getCourseOfferedInSummer() {
+		return courseOfferedInSummer;
+	}
+	public void setCourseOfferedInSummer(String courseOfferedInSummer) {
+		this.courseOfferedInSummer = courseOfferedInSummer;
+	}
+	public String getCoursePrereqs() {
+		return CoursePrereqs;
+	}
+	public void setCoursePrereqs(String coursePrereqs) {
+		CoursePrereqs = coursePrereqs;
+	}
+	public String getCourseTeachers() {
+		return CourseTeachers;
+	}
+	public void setCourseTeachers(String courseTeachers) {
+		CourseTeachers = courseTeachers;
+	}
+	
+	
 }

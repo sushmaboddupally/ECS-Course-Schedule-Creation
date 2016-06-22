@@ -18,7 +18,7 @@ public class main {
 	 * @param args
 	 */
 	public static void main(String[] args) {	
-		String fileName ="TestDataCourses.csv";
+		String fileName ="TestDataDegrees.csv";
 		String line = null;
 		String[] token;
 		//String dataType; 
@@ -34,37 +34,27 @@ public class main {
 	        inputSteam.hasNext();
 	        while((line = bufferedReader.readLine()) != null)
 	        {
-	        	Course gradSchool = new Course();
+	        	DegreeRequirements gradSchool = new DegreeRequirements();
 	        		//split data by comma
 		        	token = line.split(",");
 		        	//dataType = token[0];
-		        	gradSchool.setCourseCode(token[0]); 
-		        	gradSchool.setCourseName(token[1]);
-		        	gradSchool.setCourseDescription(token[2]);
-		        	gradSchool.setCourseHours(token[3]);
-		        	gradSchool.setCourseCap(token[4]);
-		        	gradSchool.setCourseOfferedInFall(token[5]);
-		        	gradSchool.setCourseOfferedInSpring(token[6]);
-		        	gradSchool.setCourseOfferedInSummer(token[7]);
-		        	
-		        	
+		        	gradSchool.setDegreeReqCode(token[0]); 
+		        	gradSchool.setDegreeReqdesc(token[1]);
+		        	gradSchool.setDegreeReqHours(token[2]);
+		        	gradSchool.setDegreeReqType(token[3]);
+		        	gradSchool.setDegreeReqCourses(token[4]);
 		        	/**
 		        	 * Determined by data type of the token, variables are set. For 
 		        	 * example if it is "Store", it has to be name of the store. However, if it 
 		        	 * is "Cashier", it is all info about the current cashier and so on. 
 		        	 */
-		        	System.out.println(gradSchool.getCourseCode());
-		        	System.out.println(gradSchool.getCourseName());
-		        	System.out.println(gradSchool.getCourseDescription());
-		        	System.out.println(gradSchool.getCourseHours());
-		        	System.out.println(gradSchool.getCourseCap());
-		        	
-		        	System.out.println(gradSchool.getCourseOfferedInFall());
-		        	System.out.println(gradSchool.getCourseOfferedInSpring());
-		        	System.out.println(gradSchool.getCourseOfferedInSummer());
-		        	
+		        	System.out.println(gradSchool.getDegreeReqCode());
+		        	System.out.println(gradSchool.getDegreeReqdesc());
+		        	System.out.println(gradSchool.getDegreeReqHours());
+		        	System.out.println(gradSchool.getDegreeReqType());
+		        	System.out.println(gradSchool.getDegreeReqCourses());
 	        }
-	        bufferedReader.close();
+	      
 		}
 		 catch(FileNotFoundException ex) 
 	    {
