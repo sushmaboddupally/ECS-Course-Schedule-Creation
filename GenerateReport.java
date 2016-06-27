@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 import SOURCE.Course;
 import SOURCE.Degree;
+import SOURCE.DegreeReq;
 import SOURCE.Faculty;
 import SOURCE.FacultyReport;
 import SOURCE.Semester;
@@ -26,7 +28,11 @@ public class GenerateReport {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		//loadDegreeReq();
 		loadUniversityCourse();
+		loadStudents();
+//		loadStudentCourse();
+//		loadUniversityFaculty();
 		/*String str = "Donnt,Doug";
 		System.out.println(str.contains("Doug"));*/
 	}
@@ -72,11 +78,12 @@ public class GenerateReport {
         	List<FacultyReport> facultyReportList = new ArrayList<FacultyReport>();
         	for(Course course : courseList){
         	for(Faculty f : facultyList){
-        		FacultyReport fr = new FacultyReport();
+        		FacultyReport fr = null;
+        		fall = false;
+    			spr = false;
+    			summer = false;
         		if(course.getCourseTeachers().contains(f.getFacultyLastName())){
-        			fr.setProfessor(f.getFacultyLastName());
-        		}
-        			
+        			    			
         			if(course.getCourseOfferedInFall().equalsIgnoreCase("Y")){
         				fall = true;
         			}
@@ -86,59 +93,47 @@ public class GenerateReport {
         			if(course.getCourseOfferedInSummer().equalsIgnoreCase("Y")){
         				summer=true;
         			}
-        			
-        			fr.setCourseCode(course.getCourseCode());
-        			fr.setCourseName(course.getCourseName());
-        			fr.setGradeSchool(f.getFacultyGradeSchool());
-        			fr.setMaxStudents(course.getCourseCap());
-        			if(fall && spr && summer){
+        			if(fall){
+        				fr = new FacultyReport();
+        				fr.setProfessor(f.getFacultyLastName());
+            			fr.setCourseCode(course.getCourseCode());
+            			fr.setCourseName(course.getCourseName());
+            			fr.setGradeSchool(f.getFacultyGradeSchool());
+            			fr.setMaxStudents(course.getCourseCap());
         				fr.setTerm("FALL");
         				fr.setMaxLoad(f.getMaxLoadFall());
         				facultyReportList.add(fr);
+        			}
+        			if(spr){
+        				fr = new FacultyReport();
+        				fr.setProfessor(f.getFacultyLastName());
+            			fr.setCourseCode(course.getCourseCode());
+            			fr.setCourseName(course.getCourseName());
+            			fr.setGradeSchool(f.getFacultyGradeSchool());
+            			fr.setMaxStudents(course.getCourseCap());
         				fr.setTerm("SPRING");
         				fr.setMaxLoad(f.getMaxLoadSpring());
         				facultyReportList.add(fr);
-        				fr.setTerm("SUMMER");
-        				fr.setMaxLoad(f.getMaxLoadSummer());
-        				facultyReportList.add(fr);
-        			}else if(fall && spr){
-        				fr.setTerm("FALL");
-        				fr.setMaxLoad(f.getMaxLoadFall());
-        				facultyReportList.add(fr);
-        				fr.setTerm("SPRING");
-        				fr.setMaxLoad(f.getMaxLoadSpring());
-        				facultyReportList.add(fr);
-        			}else if(spr && summer){
-        				fr.setTerm("SPRING");
-        				fr.setMaxLoad(f.getMaxLoadSpring());
-        				facultyReportList.add(fr);
-        				fr.setTerm("SUMMER");
-        				fr.setMaxLoad(f.getMaxLoadSummer());
-        				facultyReportList.add(fr);
-        			}else if(summer && fall){
-        				fr.setTerm("FALL");
-        				fr.setMaxLoad(f.getMaxLoadFall());
-        				facultyReportList.add(fr);
-        				fr.setTerm("SUMMER");
-        				fr.setMaxLoad(f.getMaxLoadSummer());
-        				facultyReportList.add(fr);
-        			}else if(fall){
-        				fr.setTerm("FALL");
-        				fr.setMaxLoad(f.getMaxLoadFall());
-        				facultyReportList.add(fr);
-        			}else if(spr){
-        				fr.setTerm("SPRING");
-        				fr.setMaxLoad(f.getMaxLoadSpring());
-        				facultyReportList.add(fr);
-        			}else if(summer){
+        			}
+        			if(summer){
+        				fr = new FacultyReport();
+        				fr.setProfessor(f.getFacultyLastName());
+            			fr.setCourseCode(course.getCourseCode());
+            			fr.setCourseName(course.getCourseName());
+            			fr.setGradeSchool(f.getFacultyGradeSchool());
+            			fr.setMaxStudents(course.getCourseCap());
         				fr.setTerm("SUMMER");
         				fr.setMaxLoad(f.getMaxLoadSummer());
         				facultyReportList.add(fr);
         			}
         		}
+        		}
         	}
         	
         	System.out.println("Faculty Report Size "+facultyReportList.size());
+        	for(FacultyReport fr: facultyReportList){
+        		System.out.println(fr.getProfessor()+","+fr.getCourseCode()+","+fr.getCourseName()+","+fr.getTerm()+","+fr.getMaxLoad());
+        	}
 
 	        // Always close files.
 	        bufferedReader.close();            
@@ -279,9 +274,13 @@ public class GenerateReport {
 	    	inputSteam.close();
 	    }
 	}
+	
+	
+	
+	
 	public static List loadStudentCourse()
 	{		
-		String fileName ="StudentCourse.csv";
+		String fileName ="StudentCourse.csv";   //STC
 		
 		String line = null;
 		String[] token;
@@ -307,8 +306,13 @@ public class GenerateReport {
 		        	 * example if it is "Store", it has to be name of the store. However, if it 
 		        	 * is "Cashier", it is all info about the current cashier and so on. 
 		        	 */
-		        	StudentCourse stuCourse = new StudentCourse();
-		        	studCourseList.add(stuCourse);
+		        	StudentCourse stc = new StudentCourse();
+		        	stc.setStudentId(token[0]);
+		        	stc.setCourseCode(token[1]);
+		        	stc.setCourseDesc(token[2]);
+		        	stc.setSemester(token[3]);
+		        	stc.setStatus(token[4]);
+		        	studCourseList.add(stc);
 		        	//universityFaculty.addFculty(faculty);
 		       }	       
 
@@ -336,7 +340,6 @@ public class GenerateReport {
 	public static void loadStudents()
 	{		
 		String fileName ="Students1.csv";
-		
 		String line = null;
 		String[] token;
 		Scanner inputSteam = null;
@@ -377,20 +380,26 @@ public class GenerateReport {
 	        	      if(stuCourse.getStudentId().equalsIgnoreCase(value.getStudentId())){
 	        	    	  Map degreeMap = loadDegrees();
 	        	    	  Degree d= (Degree) degreeMap.get(value.getDegree());
+	        	    	  if(d!=null){
 	        	    	  StudentReport stuReport = new StudentReport();
-	        	    	  stuReport.setNoofStudents(value.getStudentId());
+	        	    	  stuReport.setNoofStudents(d.getForescast());
 	        	    	  stuReport.setGradeSchool(d.getGradSchool());
 	        	    	  Map semMap = loaddsemesters();
 	        	    	  
-	        	    	  Semester s= (Semester) degreeMap.get(value.getDegree());
+	        	    	  Semester s= (Semester) semMap.get(value.getSemester());
 	        	    	  stuReport.setStartDate(s.getStartDate());
 	        	    	  stuReport.setCourseCompletionDate(s.getEndDate());
 	        	    	  stuReportList.add(stuReport);
+	        	    	  }
 	        	      }
 	        	    }
 	        	
 	        		
 	        	}
+	        }
+	        for(StudentReport s:stuReportList){
+	        	System.out.println(s.getNoofStudents()+","+s.getGradeSchool()+","+s.getStartDate()
+	        	+","+s.getCourseCompletionDate()+","+s.getCompletedSubject()+","+s.getCourseCompletionDate());
 	        }
 	    }
 	    catch(FileNotFoundException ex) 
@@ -442,21 +451,19 @@ public class GenerateReport {
 	        
 	        // Always close files.
 	        bufferedReader.close();  
-	        List<StudentCourse> stuCourseList = loadStudentCourse();
+	        /*List<StudentCourse> stuCourseList = loadStudentCourse();
 	        for(StudentCourse stuCourse : stuCourseList){
 	        	{
 	        		Set keys = map.keySet();
 	        	    for (Iterator i = keys.iterator(); i.hasNext();) {
-	        	      Integer key = (Integer) i.next();
-	        	      String value = (String) map.get(key);
+	        	      //Integer key = (Integer) i.next();
+	        	      String value = (String) map.get(i);
 	        	      if(stuCourse.getStudentId().equalsIgnoreCase(value)){
 	        	    	  
 	        	      }
 	        	    }
-	        	
-	        		
 	        	}
-	        }
+	        }*/
 	    }
 	    catch(FileNotFoundException ex) 
 	    {
@@ -506,7 +513,7 @@ public class GenerateReport {
 	        
 	        // Always close files.
 	        bufferedReader.close();  
-	        List<StudentCourse> stuCourseList = loadStudentCourse();
+	        /*List<StudentCourse> stuCourseList = loadStudentCourse();
 	        for(StudentCourse stuCourse : stuCourseList){
 	        	{
 	        		Set keys = map.keySet();
@@ -520,7 +527,7 @@ public class GenerateReport {
 	        	
 	        		
 	        	}
-	        }
+	        }*/
 	    }
 	    catch(FileNotFoundException ex) 
 	    {
@@ -539,5 +546,72 @@ public class GenerateReport {
 	    }
 	    return map;
 	}
+	
+	
+	private static Object token(Object object) {
+		// TODO Auto-generated method stub
+		return null;
+	}	
+	
+	
+	public static void loadDegreeReq()
+	{		
+		String fileName ="TestDataDegreePlanReq.csv";
+		String line = null;
+		String line1 = null;
+		String line2 = null;
+		String[] token;
+		String[] token1;
+		String[] token2;
+		
+		Scanner inputSteam = null;
+	
+	    try { 
+	        // FileReader reads text files in the default encoding.
+	        FileReader fileReader = 
+	            new FileReader(fileName);
+	        // Always wrap FileReader in BufferedReader.
+	        BufferedReader bufferedReader = 
+	            new BufferedReader(fileReader);
+	        //while there is data in file do this
+	        inputSteam = new Scanner(fileReader);
+	        
+	        while(inputSteam.hasNext()) 
+	        {
+	        	inputSteam.hasNext();
+	        		//split data by comma
+	        	   line = inputSteam.nextLine();
+		        	
+	        	   //line = line.replace('"', "");
+		        	//System.out.println(splitterString);
+		        	int test =0;
+		        	//DegreeReq degreereq = new DegreeReq(token[1],token[0],token[2],token[3]);
+		        //	degreereq.setDegreeReqCourses(token2);
+		       }	       
+	        
+	        // Always close files.
+	        bufferedReader.close();  
+	    
+	        }
+	    
+	    catch(FileNotFoundException ex) 
+	    {
+	        System.out.println(
+	            "Unable to open file '" + 
+	            fileName + "'");                
+	    }
+	    catch(IOException ex) {
+	        System.out.println(
+	            "Error reading file '" 
+	            + fileName + "'");   	
+		
+		}
+	    finally{
+	    	inputSteam.close();
+	    }
+	  
+	}
+	
+	
 
 }
