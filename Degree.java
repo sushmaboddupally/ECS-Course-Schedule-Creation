@@ -16,7 +16,6 @@ ArrayList<DegreeReq> degreeReq;
 	private String forescast;
 
 	public Degree(String degreeCode, String gradSchool, String degreeName, String forescast) {
-		super();
 		this.degreeCode = degreeCode;
 		this.gradSchool = gradSchool;
 		this.degreeName = degreeName;

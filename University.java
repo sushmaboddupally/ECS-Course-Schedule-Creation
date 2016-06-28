@@ -34,12 +34,27 @@ public class University
 	private TreeMap<String, DegreeReq> degreeReq;
 	
 	private TreeMap<String, Semester> semester;
+	private List<StudentSTU> studentList;
 	
 	/**
 	 * Association Type = POSPD.UPC
 	 */
 	//private TreeSet<Session> sessions;
     
+	/**
+	 * @return the studentList
+	 */
+	public List<StudentSTU> getStudentList() {
+		return studentList;
+	}
+
+	/**
+	 * @param studentList the studentList to set
+	 */
+	public void setStudentList(List<StudentSTU> studentList) {
+		this.studentList = studentList;
+	}
+
 	/**
      * Default Store constructor that creates an instance of Store with TreeMap of items, cashiers, registers, 
      * upcs and taxCategories, and TreeSet of sessions.
@@ -55,6 +70,7 @@ public class University
 		gradSchool = new TreeMap <String, GraduateSchool>();
 		degreeReq = new TreeMap <String, DegreeReq>();
 		semester = new TreeMap <String, Semester>();
+		studentList = new ArrayList<StudentSTU>();
 		//sessions = new TreeSet<Session>();
 		//upcs = new TreeMap <String, UPC>();
 	}
@@ -78,6 +94,7 @@ public class University
 		degreeReq = new TreeMap <String, DegreeReq>();
 		semester = new TreeMap <String, Semester>();
 		studentSTU = new TreeMap <String, StudentSTU>();
+		studentList = new ArrayList<StudentSTU>();
 		//upcs = new TreeMap <String, UPC>();
 		//taxCategories = new TreeMap <String, TaxCategory>();
 		//sessions = new TreeSet<Session>();
@@ -163,7 +180,7 @@ public class University
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public TreeMap<String, Student> getStudent() {
 		return student;
 	}
@@ -271,6 +288,7 @@ public class University
 			getStudentSTU().put(studentSTU.getStudentSTUId(), studentSTU);
 		}
 	}
+	
 	
 	public void removeFculty(Faculty faculty )
 	{
