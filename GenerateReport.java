@@ -12,15 +12,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import SOURCE.Course;
+import SOURCE.CourseStudent;
 import SOURCE.Degree;
 import SOURCE.DegreeReq;
 import SOURCE.Faculty;
 import SOURCE.FacultyReport;
+import SOURCE.Schedule;
 import SOURCE.Semester;
 import SOURCE.StudentCourse;
 import SOURCE.StudentReport;
+import SOURCE.StudentSTU;
 import SOURCE.Studentd;
 import SOURCE.University;
 
@@ -326,7 +330,7 @@ public class GenerateReport {
 	            fileName + "'");                
 	    }
 	    catch(IOException ex) {
-	        System.out.println(
+	        System.out.println( 
 	            "Error reading file '" 
 	            + fileName + "'");   	
 		
@@ -559,11 +563,8 @@ public class GenerateReport {
 		String fileName ="TestDataDegreePlanReq.csv";
 		String line = null;
 		String line1 = null;
-		String line2 = null;
 		String[] token;
 		String[] token1;
-		String[] token2;
-		
 		Scanner inputSteam = null;
 	
 	    try { 
@@ -575,19 +576,17 @@ public class GenerateReport {
 	            new BufferedReader(fileReader);
 	        //while there is data in file do this
 	        inputSteam = new Scanner(fileReader);
-	        
+	        inputSteam.nextLine();
 	        while(inputSteam.hasNext()) 
 	        {
-	        	inputSteam.hasNext();
-	        		//split data by comma
-	        	   line = inputSteam.nextLine();
-		        	
-	        	   //line = line.replace('"', "");
-		        	//System.out.println(splitterString);
-		        	int test =0;
-		        	//DegreeReq degreereq = new DegreeReq(token[1],token[0],token[2],token[3]);
-		        //	degreereq.setDegreeReqCourses(token2);
-		       }	       
+	        	 line = inputSteam.nextLine();
+		         token = line.split(",");
+		         token1 = line.split("\"");
+		         List<String> elephantList = Arrays.asList(token1[1].split(","));
+ 		         DegreeReq degreereq = new DegreeReq(token[1],token[0],token[2],token[3]);
+		         degreereq.setDegreeReqList(elephantList);
+		        
+		     }	       
 	        
 	        // Always close files.
 	        bufferedReader.close();  
@@ -610,6 +609,49 @@ public class GenerateReport {
 	    	inputSteam.close();
 	    }
 	  
+	}
+	
+	
+	public static void scheduleReport(){
+		List<String> studentIdList = null;
+		Map<String, CourseStudent> courseList = new HashMap<String,CourseStudent>();
+		for (Entry<String, Course> entry : myUniversityCourse.getCourses().entrySet()) 
+		{
+			String courseCode = entry.getValue().getCourseCode();
+			CourseStudent courseStu = new CourseStudent();
+			for(StudentSTU studentStu : myUniversityStudentSTU.getStudentList()){
+				String id = studentStu.getStudentSTUId();
+				String courseId = studentStu.getStudentGradSch();
+				 studentIdList = new ArrayList<String>();
+				if(courseCode.equalsIgnoreCase(courseId)){
+					courseStu.setFaculty(entry.getValue().getCourseTeachers());
+					studentIdList.add(id);
+				}
+				courseStu.setStudentList(studentIdList);
+	}
+			courseList.put(courseCode, courseStu);
+			
+		}
+		
+		for(String courseValue : courseList.keySet())
+		{
+		Schedule schedule = new Schedule();
+		schedule.setAcademicLevel("Graduate");
+		schedule.setCredits("3");
+		schedule.setSection(courseValue);
+		CourseStudent occupancy = (CourseStudent) courseList.get(courseValue);
+		schedule.setOccupied(String.valueOf(occupancy.getStudentList().size()));
+		int available = 25 - (Integer.parseInt(schedule.getOccupied()));
+		schedule.setAvailability(String.valueOf(available));
+		if(available > 0){
+			schedule.setStatus("Open");
+	}else{
+		schedule.setStatus(" ");
+	}
+		schedule.setFaculty(occupancy.getFaculty());
+		System.out.println("Faculty "+occupancy.getFaculty());
+		}
+		
 	}
 	
 	
