@@ -6,16 +6,23 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import SOURCE.GraduateSchool;
+import SOURCE.Student;
+import java.io.FileWriter;
+import java.util.ArrayList;
 
 public class GradEdit extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField txtGradname;
+	private JTextField txtAbr;
+	ArrayList<GraduateSchool> stdList=new ArrayList<GraduateSchool>();
 	private JTextField textField;
-	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -54,28 +61,63 @@ public class GradEdit extends JFrame {
 		lblGradSchoolName_1.setBounds(57, 99, 113, 14);
 		contentPane.add(lblGradSchoolName_1);
 		
-		textField = new JTextField();
-		textField.setBounds(219, 50, 147, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtGradname = new JTextField();
+		txtGradname.setBounds(219, 50, 147, 20);
+		contentPane.add(txtGradname);
+		txtGradname.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(219, 96, 147, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		txtAbr = new JTextField();
+		txtAbr.setBounds(219, 96, 147, 20);
+		contentPane.add(txtAbr);
+		txtAbr.setColumns(10);
 		
 		JButton btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				writeDataToCSV();
+
+			}
+		});
 		btnSave.setBounds(93, 170, 89, 23);
 		contentPane.add(btnSave);
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(JFrame.EXIT_ON_CLOSE);
+				setVisible(false);
+				dispose();
 			}
 		});
-		btnCancel.setBounds(238, 170, 89, 23);
+		btnCancel.setBounds(349, 332, 89, 23);
 		contentPane.add(btnCancel);
+		
 	}
+	
+	public void writeDataToCSV()
+	{
+		FileWriter fileWriter = null;
+		try{
+			fileWriter = new FileWriter("OUTPUT_GradSchools.CSV", false);
+			fileWriter.append("Degree Code,Grad School,Degree Name,Forecast");
+			fileWriter.append("\n");
+			for (GraduateSchool student : stdList) {
+				fileWriter.append(student.getName());
+				fileWriter.append(",");
+				fileWriter.append(student.getAbbrevation());
+				fileWriter.append("\n");
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally{
+			try{
+				fileWriter.flush();
+				fileWriter.close();
 
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
 }

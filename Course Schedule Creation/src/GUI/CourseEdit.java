@@ -4,24 +4,50 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.AbstractTableModel;
+
+import GUI.StuCourseEdit.StudentTableModel;
+import SOURCE.Course;
+import SOURCE.Student;
+
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
 public class CourseEdit extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_8;
-	private JTextField textField;
+	private JFrame contentPane;
+	private JTextField textFieldCourseCode;
+	private JTextField textFieldCourseName;
+	private JTextField textFieldCourseDesc;
+	private JTextField textFieldCourseHrs;
+	private JTextField textFieldCourseCapacity;
+	private JTextField textFieldCoursePrereq;
+	
+	JComboBox fallComboBox;
+	JComboBox springComboBox;
+	JComboBox summerComboBox;
+	JComboBox teacherComboBox;
+	
+	JTable table;
+
+	StudentTableModel tableModel;
+	ArrayList<Course> stdList=new ArrayList<Course>();
+	List<String> teacherList= new ArrayList<String>();
 
 	/**
 	 * Launch the application.
@@ -44,11 +70,12 @@ public class CourseEdit extends JFrame {
 	 * Create the frame.
 	 */
 	public CourseEdit() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		readDataFromCSV();
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 711, 391);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		contentPane = this;
+		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		//setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblCourseCode = new JLabel("Course Code");
@@ -91,34 +118,37 @@ public class CourseEdit extends JFrame {
 		lblTeachers.setBounds(42, 239, 83, 14);
 		contentPane.add(lblTeachers);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(160, 33, 86, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		textFieldCourseCode = new JTextField();
+		textFieldCourseCode.setBounds(160, 33, 86, 20);
+		contentPane.add(textFieldCourseCode);
+		textFieldCourseCode.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(160, 58, 86, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		textFieldCourseName = new JTextField();
+		textFieldCourseName.setBounds(160, 58, 86, 20);
+		contentPane.add(textFieldCourseName);
+		textFieldCourseName.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(160, 86, 86, 20);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		textFieldCourseDesc = new JTextField();
+		textFieldCourseDesc.setBounds(160, 86, 86, 20);
+		contentPane.add(textFieldCourseDesc);
+		textFieldCourseDesc.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(160, 108, 86, 20);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		textFieldCourseHrs = new JTextField();
+		textFieldCourseHrs.setBounds(160, 108, 86, 20);
+		contentPane.add(textFieldCourseHrs);
+		textFieldCourseHrs.setColumns(10);
 		
-		textField_8 = new JTextField();
-		textField_8.setBounds(160, 211, 86, 20);
-		contentPane.add(textField_8);
-		textField_8.setColumns(10);
+		textFieldCourseCapacity = new JTextField();
+		textFieldCourseCapacity.setBounds(160, 211, 86, 20);
+		contentPane.add(textFieldCourseCapacity);
+		textFieldCourseCapacity.setColumns(10);
 		
-		JList list = new JList();
-		list.setBounds(326, 36, 316, 188);
-		contentPane.add(list);
+		table = new JTable();
+		tableModel=new StudentTableModel();
+		table.setModel(tableModel);
+		JScrollPane contentPane1 = new JScrollPane(table);
+		contentPane1.setBounds(326, 36, 316, 188);
+		contentPane.add(contentPane1);
 	
 		
 		JButton btnSave = new JButton("Add");
@@ -166,26 +196,196 @@ public class CourseEdit extends JFrame {
 		lblCourseEdit.setBounds(447, 11, 76, 14);
 		contentPane.add(lblCourseEdit);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(160, 133, 86, 20);
-		contentPane.add(comboBox_1);
+		String yesNo[]=new String[]{
+				"Y","N"
+		};
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(160, 158, 86, 20);
-		contentPane.add(comboBox_2);
+		fallComboBox = new JComboBox(yesNo);
+		fallComboBox.setBounds(160, 133, 86, 20);
+		contentPane.add(fallComboBox);
 		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(160, 183, 86, 20);
-		contentPane.add(comboBox_3);
+		springComboBox = new JComboBox(yesNo);
+		springComboBox.setBounds(160, 158, 86, 20);
+		contentPane.add(springComboBox);
 		
-		JComboBox comboBox_4 = new JComboBox();
-		comboBox_4.setBounds(160, 236, 86, 20);
-		contentPane.add(comboBox_4);
+		summerComboBox = new JComboBox(yesNo);
+		summerComboBox.setBounds(160, 183, 86, 20);
+		contentPane.add(summerComboBox);
 		
-		textField = new JTextField();
-		textField.setBounds(160, 8, 86, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		teacherComboBox = new JComboBox(teacherList.toArray());
+		teacherComboBox.setBounds(160, 236, 86, 20);
+		contentPane.add(teacherComboBox);
+		
+		textFieldCoursePrereq = new JTextField();
+		textFieldCoursePrereq.setBounds(160, 8, 86, 20);
+		contentPane.add(textFieldCoursePrereq);
+		textFieldCoursePrereq.setColumns(10);
+	}
+	
+	class StudentTableModel extends AbstractTableModel {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public int getRowCount() {
+			return stdList.size();
+		}
+		public void removeRow(Course student) {
+			stdList.remove(student);
+			fireTableRowsDeleted(stdList.size()-1, stdList.size()-1);
+		}
+
+		public void addRow(Course student)
+		{
+			stdList.add(student);
+			fireTableRowsInserted(stdList.size()-1, stdList.size()-1);
+		}
+
+		public void updateRow(Course student,int index)
+		{
+			stdList.set(index,student);
+			fireTableRowsUpdated(stdList.size()-1, stdList.size()-1);
+		}
+
+		public String getColumnName(int columnIndex) {
+			switch (columnIndex) {
+			case 0: return "Couse Code";
+			case 1: return "Couse Name";
+			case 2: return "Couse Desc";
+			case 3: return "Couse Hours";
+			case 4: return "Couse Cap";
+			case 5: return "In Fall";
+			case 6: return "In Spring";
+			case 7: return "In Summer";
+			case 8: return "Couse Prereq";
+			case 9: return "Teachers";
+			
+			default: return "";
+			}
+		}
+
+		public Object getValueAt(int rowIndex, int columnIndex) {
+			Course student = stdList.get(rowIndex);
+
+			switch (columnIndex) {
+			case 0: return student.getCourseCode();
+			case 1: return student.getCourseName();
+			case 2: return student.getCourseDescription();
+			case 3: return student.getCourseHours();
+			case 4: return student.getCourseCap();
+			case 5: return student.getCourseOfferedInFall();
+			case 6: return student.getCourseOfferedInSpring();
+			case 7: return student.getCourseOfferedInSummer();
+			case 8: return student.getCoursePrereqs();
+			case 9: return student.getCourseTeachers();
+			
+			default: return null;
+
+			}
+		}
+		public Course getStudent(int row)
+		{
+			return stdList.get(row);
+		}
+		@Override
+		public int getColumnCount() {
+			// TODO Auto-generated method stub
+			return 10;
+		}
+
+	}
+	
+	
+	public void readDataFromCSV()
+	{
+		BufferedReader fileReader = null;
+		try{
+			HashSet<String> hsTeachr=new HashSet<String>();
+			String line = "";
+			fileReader = new BufferedReader(new FileReader("TestDataCourses.csv"));
+			fileReader.readLine();
+			while ((line = fileReader.readLine()) != null) {
+				String[] tokens = line.split(",");
+				String courseCode="",courseName="",courseDesc="",courseHrs="", courseCap="",courseFall="",courseSpring="", courseSummer="", coursePre="",courseTeach="";
+				if (tokens.length > 0) {				
+					courseCode=tokens[0];
+					courseName=tokens[1];
+					courseDesc=tokens[2];
+					courseHrs=tokens[3];
+					courseCap=tokens[4];
+					courseFall=tokens[5];
+					courseSpring=tokens[6];
+					courseSummer=tokens[7];
+					coursePre=tokens[8];
+					courseTeach=tokens[9];
+					if(!hsTeachr.contains(courseTeach))
+					{
+						teacherList.add(courseTeach);
+						hsTeachr.add(courseTeach);
+					}
+				}
+				Course std=new Course(courseCode,courseName,courseDesc,courseHrs,courseCap,courseFall,courseSpring,courseSummer,coursePre,courseTeach);
+				stdList.add(std);
+			}
+
+
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			try{
+				fileReader.close();
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+		}		
+
+	}
+
+	public void writeDataToCSV()
+	{
+		FileWriter fileWriter = null;
+		try{
+			fileWriter = new FileWriter("OUTPUT4.CSV", false);
+			fileWriter.append("courseCode,courseName,courseDesc,courseHrs,courseCap,courseFall,courseSpring,courseSummer,coursePre,courseTeach");
+			fileWriter.append("\n");
+			for (Course student : stdList) {
+				fileWriter.append(student.getCourseCode());
+				fileWriter.append(",");
+				fileWriter.append(student.getCourseName());
+				fileWriter.append(",");
+				fileWriter.append(student.getCourseDescription());
+				fileWriter.append(",");
+				fileWriter.append(student.getCourseHours());
+				fileWriter.append(",");
+				fileWriter.append(student.getCourseCap());
+				fileWriter.append(",");
+				fileWriter.append(student.getCourseOfferedInFall());
+				fileWriter.append(",");
+				fileWriter.append(student.getCourseOfferedInSpring());
+				fileWriter.append(",");
+				fileWriter.append(student.getCourseOfferedInSpring());
+				fileWriter.append(",");
+				fileWriter.append(student.getCourseOfferedInSummer());
+				fileWriter.append(",");
+				fileWriter.append(student.getCoursePrereqs());
+				fileWriter.append(",");
+				fileWriter.append(student.getCourseTeachers());
+				fileWriter.append("\n");
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally{
+			try{
+				fileWriter.flush();
+				fileWriter.close();
+
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
 	}
 
 }

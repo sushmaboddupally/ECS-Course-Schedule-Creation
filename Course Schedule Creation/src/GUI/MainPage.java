@@ -143,9 +143,6 @@ public class MainPage {
 		JSeparator separator_7 = new JSeparator();
 		mnFaculty.add(separator_7);
 		
-		JMenuItem mntmAdd_1 = new JMenuItem("Faculty Load");
-		mnFaculty.add(mntmAdd_1);
-		
 		JSeparator separator_2 = new JSeparator();
 		mnMaintain.add(separator_2);
 		

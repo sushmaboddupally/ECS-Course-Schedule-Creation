@@ -1,22 +1,46 @@
 package GUI;
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.awt.TextField;
-import java.awt.BorderLayout;
-import java.awt.TextArea;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.AbstractTableModel;
+
+import GUI.StuCourseEdit.StudentTableModel;
+import SOURCE.University;
+import SOURCE.Student;
+
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class UnivEdit {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-
+	private JTextField txtName;
+	private JTextField txtAbr;
+	
+	ArrayList<University> stdList=new ArrayList<University>();
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -58,22 +82,28 @@ public class UnivEdit {
 		lblNewLabel_1.setBounds(100, 118, 104, 14);
 		frame.getContentPane().add(lblNewLabel_1);
 		
-		textField = new JTextField();
-		textField.addActionListener(new ActionListener() {
+		txtName = new JTextField();
+		txtName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 			}
 		});
-		textField.setBounds(260, 65, 86, 20);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		txtName.setBounds(260, 65, 86, 20);
+		frame.getContentPane().add(txtName);
+		txtName.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(260, 115, 86, 20);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		txtAbr = new JTextField();
+		txtAbr.setBounds(260, 115, 86, 20);
+		frame.getContentPane().add(txtAbr);
+		txtAbr.setColumns(10);
 		
 		JButton btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				writeDataToCSV();
+
+			}
+		});
 		btnSave.setBounds(100, 183, 89, 23);
 		frame.getContentPane().add(btnSave);
 		
@@ -95,5 +125,33 @@ public class UnivEdit {
 	protected void setUniversityName(Object token) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void writeDataToCSV()
+	{
+		FileWriter fileWriter = null;
+		try{
+			fileWriter = new FileWriter("OUTPUT_University.CSV", false);
+			fileWriter.append("University Name, Abbreviation");
+			fileWriter.append("\n");
+			for (University student : stdList) {
+				fileWriter.append(student.getName());
+				fileWriter.append(",");
+				fileWriter.append(student.getNumber());
+				fileWriter.append("\n");
+			}	
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally{
+			try{
+				fileWriter.flush();
+				fileWriter.close();
+
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
 	}
 }
