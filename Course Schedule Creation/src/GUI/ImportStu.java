@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+
 import SOURCE.Student;
 
 import javax.swing.JTextArea;
@@ -113,7 +114,7 @@ public class ImportStu extends JFrame {
 				System.out.println(data);
 				
 				//Need to pass this data to Generate schedule Method or function
-				//GenerateSchedule(data)
+				GenerateReport.loadUniversityCourse();
 			}
 			inputStream.close();
 		   } catch (FileNotFoundException e){
