@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import SOURCE.Student;
+
 import javax.swing.JTextArea;
 import java.awt.TextField;
 import java.awt.TextArea;
@@ -12,7 +15,15 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import javax.swing.JFileChooser;
 
@@ -20,6 +31,8 @@ public class ImportStu extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
+	ArrayList<Student> stdList=new ArrayList<Student>();
+	List<String> degreeList= new ArrayList<String>();
 
 	/**
 	 * Launch the application.
@@ -79,7 +92,7 @@ public class ImportStu extends JFrame {
 		JButton btnImport = new JButton("Import");
 		btnImport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				importdata();
 			}
 		});
 		btnImport.setBounds(108, 159, 89, 23);
@@ -89,5 +102,22 @@ public class ImportStu extends JFrame {
 		textField.setBounds(108, 90, 86, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
+	}
+	public void importdata(){
+		String fileName = "STU.DUMP.CSV";
+		File file = new File(fileName);
+		try{
+			Scanner inputStream = new Scanner(file);
+			while(inputStream.hasNext()){
+				String data = inputStream.next();
+				System.out.println(data);
+				
+				//Need to pass this data to Generate schedule Method or function
+				//GenerateSchedule(data)
+			}
+			inputStream.close();
+		   } catch (FileNotFoundException e){
+			   e.printStackTrace();
+		   }	
 	}
 }

@@ -220,12 +220,12 @@ public class SemesterEdit extends JFrame {
 			fileWriter = new FileWriter("TestDataSemesters.csv", false);
 			fileWriter.append("Name,Start,End");
 			fileWriter.append("\n");
-			for (Semester student : semList) {
-				fileWriter.append(student.getName());
+			for (Semester semester : semList) {
+				fileWriter.append(semester.getName());
 				fileWriter.append(",");
-				fileWriter.append(student.getStartDate());
+				fileWriter.append(semester.getStartDate());
 				fileWriter.append(",");
-				fileWriter.append(student.getEndDate());
+				fileWriter.append(semester.getEndDate());
 				fileWriter.append("\n");
 			}	
 		}catch (Exception e) {
@@ -252,20 +252,20 @@ public class SemesterEdit extends JFrame {
 		public int getRowCount() {
 			return semList.size();
 		}
-		public void removeRow(Semester student) {
-			semList.remove(student);
+		public void removeRow(Semester semester) {
+			semList.remove(semester);
 			fireTableRowsDeleted(semList.size()-1, semList.size()-1);
 		}
 
-		public void addRow(Semester student)
+		public void addRow(Semester semester)
 		{
-			semList.add(student);
+			semList.add(semester);
 			fireTableRowsInserted(semList.size()-1, semList.size()-1);
 		}
 
-		public void updateRow(Semester student,int index)
+		public void updateRow(Semester semester,int index)
 		{
-			semList.set(index,student);
+			semList.set(index,semester);
 			fireTableRowsUpdated(semList.size()-1, semList.size()-1);
 		}
 
@@ -279,12 +279,12 @@ public class SemesterEdit extends JFrame {
 		}
 
 		public Object getValueAt(int rowIndex, int columnIndex) {
-			Semester student = semList.get(rowIndex);
+			Semester semester = semList.get(rowIndex);
 
 			switch (columnIndex) {
-			case 0: return student.getName();
-			case 1: return student.getStartDate();
-			case 2: return student.getEndDate();
+			case 0: return semester.getName();
+			case 1: return semester.getStartDate();
+			case 2: return semester.getEndDate();
 			default: return null;
 
 			}

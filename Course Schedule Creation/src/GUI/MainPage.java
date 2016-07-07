@@ -82,9 +82,6 @@ public class MainPage {
 				nw.NewScreen();
 			}
 		});
-		
-		JSeparator separator_9 = new JSeparator();
-		mnUniversity.add(separator_9);
 		mnUniversity.add(mntmGradSchoolEdit);
 		
 		JMenuItem mntmUniversity = new JMenuItem("University");
@@ -101,7 +98,7 @@ public class MainPage {
 		
 		JSeparator separator = new JSeparator();
 		mnMaintain.add(separator);
-		
+	
 		JMenu mnStudentData = new JMenu("Student Data");
 		mnMaintain.add(mnStudentData);
 		
@@ -118,8 +115,7 @@ public class MainPage {
 		mnStudentData.add(separator_10);
 		
 		JMenuItem mntmStudentCourseData_1 = new JMenuItem("Student Course Edit");
-		mntmStudentCourseData_1.addActionListener(new ActionListener() {
-			
+		mntmStudentCourseData_1.addActionListener(new ActionListener() {	
 			public void actionPerformed(ActionEvent e) {
 				StuCourseEdit nw = new StuCourseEdit();
 				nw.NewScreen();
@@ -142,9 +138,6 @@ public class MainPage {
 			}
 		});
 		mnFaculty.add(mntmFacultiEdit);
-		
-		JSeparator separator_7 = new JSeparator();
-		mnFaculty.add(separator_7);
 		
 		JSeparator separator_2 = new JSeparator();
 		mnMaintain.add(separator_2);

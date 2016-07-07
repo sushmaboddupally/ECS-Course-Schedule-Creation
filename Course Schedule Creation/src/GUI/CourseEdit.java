@@ -11,10 +11,12 @@ import javax.swing.table.AbstractTableModel;
 
 import GUI.StuCourseEdit.StudentTableModel;
 import SOURCE.Course;
+import SOURCE.Faculty;
 import SOURCE.Student;
 
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -154,6 +156,8 @@ public class CourseEdit extends JFrame {
 		JButton btnSave = new JButton("Add");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Course cou= new Course(textFieldCourseCode.getText(),textFieldCourseName.getText(),textFieldCourseDesc.getText(),textFieldCourseHrs.getText(),textFieldCourseCapacity.getText(),textFieldCoursePrereq.getText(),(String)fallComboBox.getSelectedItem(),(String)springComboBox.getSelectedItem(),(String)summerComboBox.getSelectedItem(),(String)teacherComboBox.getSelectedItem());
+				tableModel.addRow(cou);
 			}
 		});
 		btnSave.setBounds(326, 255, 89, 23);
@@ -162,7 +166,8 @@ public class CourseEdit extends JFrame {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(JFrame.EXIT_ON_CLOSE);
+				setVisible(false);
+				dispose();
 			}
 		});
 		btnCancel.setBounds(359, 307, 89, 23);
@@ -171,6 +176,8 @@ public class CourseEdit extends JFrame {
 		JButton btnUpdate = new JButton("Update");
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Course cou= new Course(textFieldCourseCode.getText(),textFieldCourseName.getText(),textFieldCourseDesc.getText(),textFieldCourseHrs.getText(),textFieldCourseCapacity.getText(),textFieldCoursePrereq.getText(),(String)fallComboBox.getSelectedItem(),(String)springComboBox.getSelectedItem(),(String)summerComboBox.getSelectedItem(),(String)teacherComboBox.getSelectedItem());
+				tableModel.updateRow(cou, table.getSelectedRow());
 			}
 		});
 		btnUpdate.setBounds(446, 255, 89, 23);
@@ -179,6 +186,13 @@ public class CourseEdit extends JFrame {
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRow()>=0)
+				{
+					Course cou= tableModel.getStudent(table.getSelectedRow());
+					tableModel.removeRow(cou);
+				}
+				else
+					JOptionPane.showMessageDialog(contentPane, "Please select a row for delete");  
 			}
 		});
 		btnDelete.setBounds(565, 255, 89, 23);
@@ -187,6 +201,7 @@ public class CourseEdit extends JFrame {
 		JButton btnSave_1 = new JButton("Save");
 		btnSave_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				writeDataToCSV();
 			}
 		});
 		btnSave_1.setBounds(229, 307, 89, 23);

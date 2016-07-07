@@ -12,6 +12,8 @@ import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 
 public class ImportStuCou extends JFrame {
@@ -74,6 +76,11 @@ public class ImportStuCou extends JFrame {
 		contentPane.add(btnAttach);
 		
 		JButton btnImport = new JButton("Import");
+		btnImport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				importdata();
+			}
+		});
 		btnImport.setBounds(94, 147, 89, 23);
 		contentPane.add(btnImport);
 		
@@ -81,6 +88,21 @@ public class ImportStuCou extends JFrame {
 		textField.setBounds(97, 82, 86, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
+	}
+	
+	public void importdata(){
+		String fileName = "STC.DUMP.CSV";
+		File file = new File(fileName);
+		try{
+			Scanner inputStream = new Scanner(file);
+			while(inputStream.hasNext()){
+				String data = inputStream.next();
+				System.out.println(data);
+			}
+			inputStream.close();
+		   } catch (FileNotFoundException e){
+			   e.printStackTrace();
+		   }	
 	}
 
 }
