@@ -5,8 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.AbstractTableModel;
 
+import java.util.HashSet;
 
+import SOURCE.Semester;
 import SOURCE.Student;
 
 import javax.swing.JTextArea;
@@ -33,12 +36,11 @@ public class ImportStu extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	ArrayList<Student> stdList=new ArrayList<Student>();
+	List<String> stdIdList= new ArrayList<String>();
+	List<String> deptCodeList= new ArrayList<String>();
+	List<String> yearsList= new ArrayList<String>();
 	List<String> degreeList= new ArrayList<String>();
-
-	/**
-	 * Launch the application.
-	 */
-	//public static void main(String[] args) {
+	
 	public void NewScreen() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -105,20 +107,68 @@ public class ImportStu extends JFrame {
 		textField.setColumns(10);
 	}
 	public void importdata(){
-		String fileName = "STU.DUMP.CSV";
-		File file = new File(fileName);
+//		String fileName = "STU.DUMP.CSV";
+//		File file = new File(fileName);
+//		try{
+//			Scanner inputStream = new Scanner(file);
+//			while(inputStream.hasNext()){
+//				String data = inputStream.next();
+//				System.out.println(data);
+//				
+//				//Need to pass this data to Generate schedule Method or function
+//				GenerateReport.loadUniversityCourse();
+//			}
+//			inputStream.close();
+//		   } catch (FileNotFoundException e){
+//			   e.printStackTrace();
+//		   }	
+//	}
+		BufferedReader fileReader = null;
 		try{
-			Scanner inputStream = new Scanner(file);
-			while(inputStream.hasNext()){
-				String data = inputStream.next();
-				System.out.println(data);
-				
-				//Need to pass this data to Generate schedule Method or function
-				GenerateReport.loadUniversityCourse();
+			HashSet<String> hsStdIt=new HashSet<String>();
+			HashSet<String> hsDptCode=new HashSet<String>();
+			HashSet<String> hsYear=new HashSet<String>();
+			String line = "";
+			fileReader = new BufferedReader(new FileReader("STU.DUMP.CSV"));
+//			fileReader.readLine();
+			while ((line = fileReader.readLine()) != null) {
+				String[] tokens = line.split(",");
+				String stdId="",DptCode="",endYear="";
+				if (tokens.length > 0) {				
+					if(!hsStdIt.contains(tokens[0]))
+					{
+						stdIdList.add(tokens[0]);
+						hsStdIt.add(tokens[0]);
+					}
+					stdId=tokens[0];
+					if(!hsDptCode.contains(tokens[1]))
+					{
+						deptCodeList.add(tokens[1]);
+						hsDptCode.add(tokens[1]);
+					}
+					DptCode=tokens[1];
+					if(!hsYear.contains(tokens[2]))
+					{
+						yearsList.add(tokens[2]);
+						hsYear.add(tokens[2]);	
+					}
+					endYear=tokens[2];
+				}
+				Student std=new Student(stdId,DptCode,"",endYear,"");
+				stdList.add(std);
+				System.out.println(stdId+","+DptCode+","+endYear);
 			}
-			inputStream.close();
-		   } catch (FileNotFoundException e){
-			   e.printStackTrace();
-		   }	
+
+
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			try{
+				fileReader.close();
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+		}		
+
 	}
 }

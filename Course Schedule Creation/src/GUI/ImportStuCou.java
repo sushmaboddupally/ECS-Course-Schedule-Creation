@@ -5,14 +5,23 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import SOURCE.Student;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
 
@@ -20,11 +29,13 @@ public class ImportStuCou extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-
-	/**
-	 * Launch the application.
-	 */
-	//public static void main(String[] args) {
+	ArrayList<Student> stdList=new ArrayList<Student>();
+	List<String> stdIdList= new ArrayList<String>();
+	List<String> deptCodeList= new ArrayList<String>();
+	List<String> yearsList= new ArrayList<String>();
+	List<String> degreeList= new ArrayList<String>();
+	List<String> gradeList= new ArrayList<String>();
+	
 	public void NewScreen() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -38,9 +49,6 @@ public class ImportStuCou extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public ImportStuCou() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -91,18 +99,60 @@ public class ImportStuCou extends JFrame {
 	}
 	
 	public void importdata(){
-		String fileName = "STC.DUMP.CSV";
-		File file = new File(fileName);
-		try{
-			Scanner inputStream = new Scanner(file);
-			while(inputStream.hasNext()){
-				String data = inputStream.next();
-				System.out.println(data);
-			}
-			inputStream.close();
-		   } catch (FileNotFoundException e){
-			   e.printStackTrace();
-		   }	
+			BufferedReader fileReader = null;
+			try{
+				HashSet<String> hsStdIt=new HashSet<String>();
+				HashSet<String> hsDptCode=new HashSet<String>();
+				HashSet<String> hsYear=new HashSet<String>();
+				HashSet<String> hsGrade=new HashSet<String>();
+				String line = "";
+				fileReader = new BufferedReader(new FileReader("STC.DUMP.CSV"));
+				fileReader.readLine();
+				while ((line = fileReader.readLine()) != null) {
+					String[] tokens = line.split(",");
+					String stdId="",DptCode="",strtYear="",grade="";
+					if (tokens.length > 0) {				
+						if(!hsStdIt.contains(tokens[0]))
+						{
+							stdIdList.add(tokens[0]);
+							hsStdIt.add(tokens[0]);
+						}
+						stdId=tokens[0];
+						if(!hsDptCode.contains(tokens[1]))
+						{
+							deptCodeList.add(tokens[1]);
+							hsDptCode.add(tokens[1]);
+						}
+						DptCode=tokens[1];
+						if(!hsYear.contains(tokens[3]))
+						{
+							yearsList.add(tokens[3]);
+							hsYear.add(tokens[3]);	
+						}
+						strtYear=tokens[3];
+						if(!hsGrade.contains(tokens[4]))
+						{
+							gradeList.add(tokens[4]);
+							hsGrade.add(tokens[4]);	
+						}
+						grade=tokens[4];
+					}
+					Student std=new Student(stdId,DptCode,"",strtYear,grade);
+					stdList.add(std);
+					System.out.println(stdId+","+DptCode+","+strtYear+","+grade);
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}finally{
+				try{
+					fileReader.close();
+				}catch (IOException e) {
+					e.printStackTrace();
+				}
+			}		
+
+		}
 	}
 
-}
+
+
