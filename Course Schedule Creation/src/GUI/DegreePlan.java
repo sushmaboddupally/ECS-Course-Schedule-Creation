@@ -221,10 +221,10 @@ public class DegreePlan extends JFrame {
 				ArrayList<String> arr=new ArrayList<String>();;
 				if (tokens.length > 0) {
 					
-					degree=tokens[0];
+					degree=tokens[3];
 					desc=tokens[1];
 					hrs=tokens[2];
-					type=tokens[3];
+					type=tokens[0];
 					for (int i = 4; i < tokens.length; i++) {
 						arr.add(tokens[i]);
 					}
@@ -240,7 +240,7 @@ public class DegreePlan extends JFrame {
 						hsType.add(type);
 					}
 				}
-				DegreeReq std=new DegreeReq(degree,desc,hrs,type);
+				DegreeReq std=new DegreeReq(type,desc,hrs,degree);
 				//std.setDegreeReqCourses((String[]) arr.toArray());
 				stdList.add(std);
 			}
