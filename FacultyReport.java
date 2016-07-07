@@ -2,6 +2,7 @@ package SOURCE;
 
 public class FacultyReport {
 	private String term;
+	private String semTerm;
 	private String gradeSchool;
 	private String courseCode;
 	private String courseName;
@@ -9,6 +10,11 @@ public class FacultyReport {
 	private String avaialbleDays;
 	private String maxLoad;
 	private String maxStudents;
+	private String currentStudents;
+	private String waitLStudents;
+	private String courseStart;
+	private String courseEnd;
+	private String courseHours;
 	/**
 	 * @return the term
 	 */
@@ -105,7 +111,77 @@ public class FacultyReport {
 	public void setMaxStudents(String maxStudents) {
 		this.maxStudents = maxStudents;
 	}
-	
-	
+	/**
+	 * @return the courseHours
+	 */
+	public String getCourseHours() {
+		return courseHours;
+	}
+	/**
+	 * @param courseHours the courseHours to set
+	 */
+	public void setCourseHours(String courseHours) {
+		this.courseHours = courseHours;
+	}
+	/**
+	 * @return the currentStudents
+	 */
+	public String getCurrentStudents() {
+		return currentStudents;
+	}
+	/**
+	 * @param currentStudents the currentStudents to set
+	 */
+	public void setCurrentStudents(String currentStudents) {
+		this.currentStudents = currentStudents;
+	}
+	/**
+	 * @return the waitLStudents
+	 */
+	public String getWaitLStudents() {
+		return waitLStudents;
+	}
+	/**
+	 * @param waitLStudents the waitLStudents to set
+	 */
+	public void setWaitLStudents(String waitLStudents) {
+		this.waitLStudents = waitLStudents;
+	}
+	/**
+	 * @return the courseStart
+	 */
+	public String getCourseStart() {
+		return courseStart;
+	}
+	/**
+	 * @param courseStart the courseStart to set
+	 */
+	public void setCourseStart(String courseStart) {
+		this.courseStart = courseStart;
+	}
+	/**
+	 * @return the courseEnd
+	 */
+	public String getCourseEnd() {
+		return courseEnd;
+	}
+	/**
+	 * @param courseEnd the courseEnd to set
+	 */
+	public void setCourseEnd(String courseEnd) {
+		this.courseEnd = courseEnd;
+	}
+	/**
+	 * @return the semTerm
+	 */
+	public String getSemTerm() {
+		return semTerm;
+	}
+	/**
+	 * @param semTerm the semTerm to set
+	 */
+	public void setSemTerm(String semTerm) {
+		this.semTerm = semTerm;
+	}
 
 }
