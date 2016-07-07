@@ -346,7 +346,7 @@ public class CourseEdit extends JFrame {
 	{
 		FileWriter fileWriter = null;
 		try{
-			fileWriter = new FileWriter("OUTPUT4.CSV", false);
+			fileWriter = new FileWriter("TestDataCourses.csv", false);
 			fileWriter.append("courseCode,courseName,courseDesc,courseHrs,courseCap,courseFall,courseSpring,courseSummer,coursePre,courseTeach");
 			fileWriter.append("\n");
 			for (Course student : stdList) {

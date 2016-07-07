@@ -39,14 +39,13 @@ public class DegreePlan extends JFrame {
 	private JFrame contentPane;
 	private JTextField textDesc;
 	private JTextField textHrs;
-	private JTextField textCourses;
 	
 	ArrayList<DegreeReq> stdList=new ArrayList<DegreeReq>();
 	List<String> degreeList= new ArrayList<String>();
 	List<String> typeList= new ArrayList<String>();
 	
-	JComboBox degreeCombo;
-	JComboBox typeCombo;
+	JComboBox typeComboBox;
+	JComboBox degreeComboBox;
 	
 	JTable table;
 
@@ -97,18 +96,14 @@ public class DegreePlan extends JFrame {
 		lblNewLabel_1.setBounds(84, 229, 118, 14);
 		contentPane.getContentPane().add(lblNewLabel_1);
 		
-		JLabel lblCourses = new JLabel("Courses");
-		lblCourses.setBounds(84, 286, 88, 14);
-		contentPane.getContentPane().add(lblCourses);
-		
 		JButton btnSave = new JButton("Add");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DegreeReq std= new DegreeReq((String)degreeCombo.getSelectedItem(),textDesc.getText(), textHrs.getText(),(String)typeCombo.getSelectedItem());
+				DegreeReq std= new DegreeReq((String)degreeComboBox.getSelectedItem(),textDesc.getText(), textHrs.getText(),(String)typeComboBox.getSelectedItem());
 				String arr[]=new String[]{
-						textCourses.getText()
+//						textCourses.getText()
 				};
-				std.setDegreeReqCourses(arr);
+				//std.setDegreeReqCourses(arr);
 				tableModel.addRow(std);
 			}
 		});
@@ -135,9 +130,9 @@ public class DegreePlan extends JFrame {
 		contentPane.getContentPane().add(textHrs);
 		textHrs.setColumns(10);
 		
-		degreeCombo = new JComboBox(degreeList.toArray());
-		degreeCombo.setBounds(212, 226, 86, 20);
-		contentPane.getContentPane().add(degreeCombo);
+		typeComboBox = new JComboBox(typeList.toArray());
+		typeComboBox.setBounds(212, 226, 86, 20);
+		contentPane.getContentPane().add(typeComboBox);
 		
 		table = new JTable();
 		tableModel=new StudentTableModel();
@@ -150,18 +145,12 @@ public class DegreePlan extends JFrame {
 		model1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		model1.addListSelectionListener(new RowListener());
 		
-		
-		textCourses = new JTextField();
-		textCourses.setBounds(212, 283, 86, 20);
-		contentPane.getContentPane().add(textCourses);
-		textCourses.setColumns(10);
-		
 		JButton btnUpdate = new JButton("Update");
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DegreeReq std= new DegreeReq((String)degreeCombo.getSelectedItem(),textDesc.getText(), textHrs.getText(),(String)typeCombo.getSelectedItem());
+				DegreeReq std= new DegreeReq((String)degreeComboBox.getSelectedItem(),textDesc.getText(), textHrs.getText(),(String)typeComboBox.getSelectedItem());
 				String arr[]=new String[]{
-						textCourses.getText()
+//						textCourses.getText()
 				};
 				std.setDegreeReqCourses(arr);
 				if(table.getSelectedRow()>=0)
@@ -202,9 +191,9 @@ public class DegreePlan extends JFrame {
 		btnSave_1.setBounds(235, 346, 89, 23);
 		contentPane.getContentPane().add(btnSave_1);
 		
-		typeCombo = new JComboBox(typeList.toArray());
-		typeCombo.setBounds(212, 62, 86, 20);
-		contentPane.getContentPane().add(typeCombo);
+		degreeComboBox = new JComboBox(degreeList.toArray());
+		degreeComboBox.setBounds(212, 62, 86, 20);
+		contentPane.getContentPane().add(degreeComboBox);
 	}
 	public void readDataFromCSV()
 	{
@@ -221,10 +210,10 @@ public class DegreePlan extends JFrame {
 				ArrayList<String> arr=new ArrayList<String>();;
 				if (tokens.length > 0) {
 					
-					degree=tokens[3];
+					degree=tokens[0];
 					desc=tokens[1];
 					hrs=tokens[2];
-					type=tokens[0];
+					type=tokens[3];
 					for (int i = 4; i < tokens.length; i++) {
 						arr.add(tokens[i]);
 					}
@@ -240,7 +229,7 @@ public class DegreePlan extends JFrame {
 						hsType.add(type);
 					}
 				}
-				DegreeReq std=new DegreeReq(type,desc,hrs,degree);
+				DegreeReq std=new DegreeReq(degree,desc,hrs,type);
 				//std.setDegreeReqCourses((String[]) arr.toArray());
 				stdList.add(std);
 			}
@@ -262,8 +251,8 @@ public class DegreePlan extends JFrame {
 	{
 		FileWriter fileWriter = null;
 		try{
-			fileWriter = new FileWriter("OUTPUT.CSV", false);
-			fileWriter.append("degree,desc,hrs,type,courses=");
+			fileWriter = new FileWriter("TestDataDegreePlanReq.csv", false);
+			fileWriter.append("degree,desc,hrs,type");
 			fileWriter.append("\n");
 			for (DegreeReq student : stdList) {
 				fileWriter.append(student.getDegreeReqCode());
@@ -273,8 +262,8 @@ public class DegreePlan extends JFrame {
 				fileWriter.append(student.getDegreeReqHours());
 				fileWriter.append(",");
 				fileWriter.append(student.getDegreeReqType());
-				fileWriter.append(",");
-				fileWriter.append(student.getDegreeReqCourses().toString());
+				//fileWriter.append(",");
+				//fileWriter.append(student.getDegreeReqCourses().toString());
 				fileWriter.append("\n");
 			}	
 		}catch (Exception e) {
@@ -384,11 +373,11 @@ public class DegreePlan extends JFrame {
 				else if(col==4)
 					courses=o.toString();
 			}
-			degreeCombo.setSelectedItem(degree);
+			degreeComboBox.setSelectedItem(degree);
 			textDesc.setText(desc);
 			textHrs.setText(hours);
-			typeCombo.setSelectedItem(type);
-			textCourses.setText(courses);
+			typeComboBox.setSelectedItem(type);
+//			textCourses.setText(courses);
 		}
 	}
 

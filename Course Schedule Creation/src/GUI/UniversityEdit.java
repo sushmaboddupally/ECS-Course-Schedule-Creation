@@ -16,24 +16,23 @@ import SOURCE.Student;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
-public class GradEdit extends JFrame {
+
+public class UniversityEdit extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtGradname;
+	private JTextField txtName;
 	private JTextField txtAbr;
 	ArrayList<GraduateSchool> stdList=new ArrayList<GraduateSchool>();
-	private JTextField textField;
 
 	/**
 	 * Launch the application.
 	 */
-	//public static void main(String[] args) {
-
-        public void NewScreen() {
+//	public static void main(String[] args) {
+	public void NewScreen() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GradEdit frame = new GradEdit();
+					UniversityEdit frame = new UniversityEdit();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +44,7 @@ public class GradEdit extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GradEdit() {
+	public UniversityEdit() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -53,21 +52,21 @@ public class GradEdit extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblGradSchoolName = new JLabel("Grad School Abbrevation");
-		lblGradSchoolName.setBounds(57, 53, 152, 14);
-		contentPane.add(lblGradSchoolName);
+		JLabel lblUniversityName = new JLabel("University Name");
+		lblUniversityName.setBounds(63, 65, 89, 14);
+		contentPane.add(lblUniversityName);
 		
-		JLabel lblGradSchoolName_1 = new JLabel("Grad School Name");
-		lblGradSchoolName_1.setBounds(57, 99, 113, 14);
-		contentPane.add(lblGradSchoolName_1);
+		JLabel lblAbbrevation = new JLabel("Abbrevation");
+		lblAbbrevation.setBounds(63, 120, 89, 14);
+		contentPane.add(lblAbbrevation);
 		
-		txtGradname = new JTextField();
-		txtGradname.setBounds(219, 50, 147, 20);
-		contentPane.add(txtGradname);
-		txtGradname.setColumns(10);
+		txtName = new JTextField();
+		txtName.setBounds(240, 62, 86, 20);
+		contentPane.add(txtName);
+		txtName.setColumns(10);
 		
 		txtAbr = new JTextField();
-		txtAbr.setBounds(219, 96, 147, 20);
+		txtAbr.setBounds(240, 117, 86, 20);
 		contentPane.add(txtAbr);
 		txtAbr.setColumns(10);
 		
@@ -78,30 +77,28 @@ public class GradEdit extends JFrame {
 
 			}
 		});
-		btnSave.setBounds(93, 170, 89, 23);
+		btnSave.setBounds(103, 185, 89, 23);
 		contentPane.add(btnSave);
-	
 		
-		JButton btnCancel_1 = new JButton("Cancel");
-		btnCancel_1.addActionListener(new ActionListener() {
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				dispose();
 			}
 		});
-		btnCancel_1.setBounds(218, 170, 89, 23);
-		contentPane.add(btnCancel_1);
-		
+		btnCancel.setBounds(222, 185, 89, 23);
+		contentPane.add(btnCancel);
 	}
 	
 	public void writeDataToCSV()
 	{
 		FileWriter fileWriter = null;
 		try{
-			fileWriter = new FileWriter("TestDataGradSchools.csv", true);
-			fileWriter.append("Degree Code,Grad School,Degree Name,Forecast");
-			fileWriter.append("\n");
-				fileWriter.append(txtGradname.getText());
+			fileWriter = new FileWriter("TestDataUniversityName.csv", true);
+//			fileWriter.append("Univ Name, Abbrevation");
+//			fileWriter.append("\n");
+				fileWriter.append(txtName.getText());
 				fileWriter.append(",");
 				fileWriter.append(txtAbr.getText());
 				fileWriter.append("\n");
@@ -121,3 +118,6 @@ public class GradEdit extends JFrame {
 		}
 	}
 }
+
+
+

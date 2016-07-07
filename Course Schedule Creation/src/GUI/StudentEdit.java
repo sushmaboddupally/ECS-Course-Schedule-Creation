@@ -280,7 +280,7 @@ public class StudentEdit extends JFrame {
 	{
 		FileWriter fileWriter = null;
 		try{
-			fileWriter = new FileWriter("OUTPUT.CSV", false);
+			fileWriter = new FileWriter("STU.DUMP.CSV", false);
 			fileWriter.append("StudentId,Dept,StartYear,GradYear");
 			fileWriter.append("\n");
 			for (Student student : stdList) {

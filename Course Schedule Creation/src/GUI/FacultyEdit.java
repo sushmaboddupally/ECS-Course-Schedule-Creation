@@ -56,7 +56,7 @@ public class FacultyEdit extends JFrame {
 	JCheckBox chckbxF;
 	
 
-	ArrayList<Faculty> stdList=new ArrayList<Faculty>();
+	ArrayList<Faculty> facList=new ArrayList<Faculty>();
 	List<String> schoolList= new ArrayList<String>();
 	List<String> degreeList= new ArrayList<String>();
 	List<String> titleList= new ArrayList<String>();
@@ -271,23 +271,23 @@ public class FacultyEdit extends JFrame {
 		 */
 		private static final long serialVersionUID = 1L;
 		public int getRowCount() {
-			return stdList.size();
+			return facList.size();
 		}
 		public void removeRow(Faculty student) {
-			stdList.remove(student);
-			fireTableRowsDeleted(stdList.size()-1, stdList.size()-1);
+			facList.remove(student);
+			fireTableRowsDeleted(facList.size()-1, facList.size()-1);
 		}
 
 		public void addRow(Faculty student)
 		{
-			stdList.add(student);
-			fireTableRowsInserted(stdList.size()-1, stdList.size()-1);
+			facList.add(student);
+			fireTableRowsInserted(facList.size()-1, facList.size()-1);
 		}
 
 		public void updateRow(Faculty student,int index)
 		{
-			stdList.set(index,student);
-			fireTableRowsUpdated(stdList.size()-1, stdList.size()-1);
+			facList.set(index,student);
+			fireTableRowsUpdated(facList.size()-1, facList.size()-1);
 		}
 
 		public String getColumnName(int columnIndex) {
@@ -307,7 +307,7 @@ public class FacultyEdit extends JFrame {
 		}
 
 		public Object getValueAt(int rowIndex, int columnIndex) {
-			Faculty student = stdList.get(rowIndex);
+			Faculty student = facList.get(rowIndex);
 
 			switch (columnIndex) {
 			case 0: return student.getFacultyLastName();
@@ -326,7 +326,7 @@ public class FacultyEdit extends JFrame {
 		}
 		public Faculty getStudent(int row)
 		{
-			return stdList.get(row);
+			return facList.get(row);
 		}
 		@Override
 		public int getColumnCount() {
@@ -399,7 +399,7 @@ public class FacultyEdit extends JFrame {
 					
 				}
 				Faculty std=new Faculty(lastName,firstName,gradSchool,degree,title,days,fall,spring,summer);
-				stdList.add(std);
+				facList.add(std);
 			}
 
 
@@ -419,10 +419,10 @@ public class FacultyEdit extends JFrame {
 	{
 		FileWriter fileWriter = null;
 		try{
-			fileWriter = new FileWriter("OUTPUT3.CSV", false);
+			fileWriter = new FileWriter("TestDataFaculty.csv", false);
 			fileWriter.append("lastName,firstName,gradSchool,degree,title,days,fall,spring,summer");
 			fileWriter.append("\n");
-			for (Faculty student : stdList) {
+			for (Faculty student : facList) {
 				fileWriter.append(student.getFacultyLastName());
 				fileWriter.append(",");
 				fileWriter.append(student.getFacultyFirstName());

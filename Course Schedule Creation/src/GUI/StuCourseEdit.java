@@ -315,7 +315,7 @@ public class StuCourseEdit extends JFrame {
 	{
 		FileWriter fileWriter = null;
 		try{
-			fileWriter = new FileWriter("OUTPUT2.CSV", false);
+			fileWriter = new FileWriter("STC.DUMP.CSV", false);
 			fileWriter.append("StudentId,Dept,Courses Completed,Grade");
 			fileWriter.append("\n");
 			for (Student student : stdList) {

@@ -44,7 +44,7 @@ public class DegreeReq extends JFrame {
 	StudentTableModel tableModel;
 	
 	JComboBox gradSchoolCombo;
-	ArrayList<Degree> stdList=new ArrayList<Degree>();
+	ArrayList<Degree> degList=new ArrayList<Degree>();
 	List<String> gradList= new ArrayList<String>();
 
 	/**
@@ -206,7 +206,7 @@ public class DegreeReq extends JFrame {
 					}
 				}
 				Degree std=new Degree(stdId,DptCode,strtYear,grade);
-				stdList.add(std);
+				degList.add(std);
 			}
 
 
@@ -226,10 +226,10 @@ public class DegreeReq extends JFrame {
 	{
 		FileWriter fileWriter = null;
 		try{
-			fileWriter = new FileWriter("OUTPUT_DegreeReq.CSV", false);
+			fileWriter = new FileWriter("TestDataDegrees.csv", false);
 			fileWriter.append("Degree Code,Grad School,Degree Name,Forecast");
 			fileWriter.append("\n");
-			for (Degree student : stdList) {
+			for (Degree student : degList) {
 				fileWriter.append(student.getDegreeCode());
 				fileWriter.append(",");
 				fileWriter.append(student.getGradSchool());
@@ -261,23 +261,23 @@ public class DegreeReq extends JFrame {
 		 */
 		private static final long serialVersionUID = 1L;
 		public int getRowCount() {
-			return stdList.size();
+			return degList.size();
 		}
 		public void removeRow(Degree student) {
-			stdList.remove(student);
-			fireTableRowsDeleted(stdList.size()-1, stdList.size()-1);
+			degList.remove(student);
+			fireTableRowsDeleted(degList.size()-1, degList.size()-1);
 		}
 
 		public void addRow(Degree student)
 		{
-			stdList.add(student);
-			fireTableRowsInserted(stdList.size()-1, stdList.size()-1);
+			degList.add(student);
+			fireTableRowsInserted(degList.size()-1, degList.size()-1);
 		}
 
 		public void updateRow(Degree student,int index)
 		{
-			stdList.set(index,student);
-			fireTableRowsUpdated(stdList.size()-1, stdList.size()-1);
+			degList.set(index,student);
+			fireTableRowsUpdated(degList.size()-1, degList.size()-1);
 		}
 
 		public String getColumnName(int columnIndex) {
@@ -291,7 +291,7 @@ public class DegreeReq extends JFrame {
 		}
 
 		public Object getValueAt(int rowIndex, int columnIndex) {
-			Degree student = stdList.get(rowIndex);
+			Degree student = degList.get(rowIndex);
 
 			switch (columnIndex) {
 			case 0: return student.getDegreeCode();
@@ -304,7 +304,7 @@ public class DegreeReq extends JFrame {
 		}
 		public Degree getStudent(int row)
 		{
-			return stdList.get(row);
+			return degList.get(row);
 		}
 		@Override
 		public int getColumnCount() {

@@ -42,7 +42,7 @@ public class SemesterEdit extends JFrame {
 	StudentTableModel tableModel;
 	
 	JComboBox semester;
-	ArrayList<Semester> stdList=new ArrayList<Semester>();
+	ArrayList<Semester> semList=new ArrayList<Semester>();
 	List<String> nameList= new ArrayList<String>();
 
 	/**
@@ -197,7 +197,7 @@ public class SemesterEdit extends JFrame {
 					}
 				}
 				Semester std=new Semester(start,name,end);
-				stdList.add(std);
+				semList.add(std);
 				line = fileReader.readLine();
 			}
 
@@ -217,10 +217,10 @@ public class SemesterEdit extends JFrame {
 	{
 		FileWriter fileWriter = null;
 		try{
-			fileWriter = new FileWriter("OUTPUT_SemesterEdit.CSV", false);
+			fileWriter = new FileWriter("TestDataSemesters.csv", false);
 			fileWriter.append("Name,Start,End");
 			fileWriter.append("\n");
-			for (Semester student : stdList) {
+			for (Semester student : semList) {
 				fileWriter.append(student.getName());
 				fileWriter.append(",");
 				fileWriter.append(student.getStartDate());
@@ -250,23 +250,23 @@ public class SemesterEdit extends JFrame {
 		 */
 		private static final long serialVersionUID = 1L;
 		public int getRowCount() {
-			return stdList.size();
+			return semList.size();
 		}
 		public void removeRow(Semester student) {
-			stdList.remove(student);
-			fireTableRowsDeleted(stdList.size()-1, stdList.size()-1);
+			semList.remove(student);
+			fireTableRowsDeleted(semList.size()-1, semList.size()-1);
 		}
 
 		public void addRow(Semester student)
 		{
-			stdList.add(student);
-			fireTableRowsInserted(stdList.size()-1, stdList.size()-1);
+			semList.add(student);
+			fireTableRowsInserted(semList.size()-1, semList.size()-1);
 		}
 
 		public void updateRow(Semester student,int index)
 		{
-			stdList.set(index,student);
-			fireTableRowsUpdated(stdList.size()-1, stdList.size()-1);
+			semList.set(index,student);
+			fireTableRowsUpdated(semList.size()-1, semList.size()-1);
 		}
 
 		public String getColumnName(int columnIndex) {
@@ -279,7 +279,7 @@ public class SemesterEdit extends JFrame {
 		}
 
 		public Object getValueAt(int rowIndex, int columnIndex) {
-			Semester student = stdList.get(rowIndex);
+			Semester student = semList.get(rowIndex);
 
 			switch (columnIndex) {
 			case 0: return student.getName();
@@ -291,7 +291,7 @@ public class SemesterEdit extends JFrame {
 		}
 		public Semester getStudent(int row)
 		{
-			return stdList.get(row);
+			return semList.get(row);
 		}
 		@Override
 		public int getColumnCount() {
